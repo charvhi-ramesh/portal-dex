@@ -512,17 +512,19 @@ Caveat: `first.current` written inside an effect is allowed by `react-hooks/refs
 | A9 | Installing `@tanstack/react-query` at the newest version is acceptable despite the `too-new` SUS flag | Package Audit | User may prefer an older pinned patch |
 | A10 | Exact-match client filtering is only needed for Human, but is applied to every species chip harmlessly | Pattern 3 | None found; verified no other chip substring-matches another species in the 826-record dataset |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **What do the header links `/` and `/collection` point to in Phase 1?** (UI-SPEC "unresolved")
+All five were resolved during Phase 1 planning (2026-11-11) by user decisions recorded in the plans as "planning decisions 1 to 5".
+
+1. **What do the header links `/` and `/collection` point to in Phase 1?** (UI-SPEC "unresolved") — RESOLVED: minimal interim pages, each with an `h1`, clearly replaceable (Home in Phase 2, Collection in Phase 3); plan 01-02.
    - Known: Home ships in Phase 2, Collection in Phase 3; the scaffold `app/page.tsx` is still the create-next-app page.
    - Recommendation: ship two minimal placeholder pages (a real `h1`, one line of copy, a link to `/browse`) rather than redirects. They are needed anyway to test FND-06 (focus after client navigation) and the BRW-11 Browse → elsewhere → Back round trip. Mark them clearly as replaced in Phases 2 and 3.
-2. **Focus after "Load more" when no next page remains** (UI-SPEC "unresolved"; its text both focuses the first new card and says the end-of-list note gets focus).
+2. **Focus after "Load more" when no next page remains** (UI-SPEC "unresolved"; its text both focuses the first new card and says the end-of-list note gets focus). — RESOLVED: Load more always moves focus to the first new card; the end note gets focus only when the press added zero cards and the button unmounted; plan 01-10.
    - Recommendation: always focus the first newly added card (programmatic `tabindex="-1"` focus, only when the load was triggered by the button, never by the IntersectionObserver); focus the end-of-list note only if the click added zero cards and the button unmounted.
-3. **May the user approve any test tooling?** No library is installed. Without Playwright/axe there is no automated check for focus, menu trap, scroll restore or axe violations.
+3. **May the user approve any test tooling?** — RESOLVED: `node --test` only in Phase 1 (no Playwright or axe); ask again at Phase 3 planning. Native History API for URL state, with the router fallback only if the Back spike (plan 01-05) shows misbehaviour. No library is installed. Without Playwright/axe there is no automated check for focus, menu trap, scroll restore or axe violations.
    - Recommendation: stay on `node --test` + manual checklist for Phase 1; ask once (at Phase 3 planning, where A11Y-06 lands) whether `@playwright/test` and `@axe-core/playwright` may be added.
-4. **Star-dot opacity** deviation from the approved UI-SPEC (Pitfall 9). Needs the planner to either lower the opacity (recommended 15%) or keep text containers on an opaque background.
-5. **Vercel Hobby image-optimisation limits** (A5): defer to Phase 3 deploy; Phase 1 only configures `remotePatterns`.
+4. **Star-dot opacity** deviation from the approved UI-SPEC (Pitfall 9). — RESOLVED: capped at 15% (UI-SPEC amended); `scripts/check-contrast.ts` verifies the composited worst case; plan 01-02. Needs the planner to either lower the opacity (recommended 15%) or keep text containers on an opaque background.
+5. **Vercel Hobby image-optimisation limits** (A5): defer to Phase 3 deploy; Phase 1 only configures `remotePatterns`. — RESOLVED: deferred to the Phase 3 deploy (out of Phase 1 scope); plan 01-05 records it as a flagged assumption.
 
 ## Environment Availability
 

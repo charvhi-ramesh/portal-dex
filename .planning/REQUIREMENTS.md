@@ -149,7 +149,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BRW-09 | Phase 1 | Pending |
 | BRW-10 | Phase 1 | Pending |
 | BRW-11 | Phase 1 | Pending |
-| CARD-01 | Phase 1 | Pending |
+| CARD-01 | Phase 1 (partial: card front without the favourite star per D-03; the star moved to CARD-06, Phase 2) | Pending |
 | CARD-02 | Phase 2 | Pending |
 | CARD-03 | Phase 2 | Pending |
 | CARD-04 | Phase 2 | Pending |

@@ -35,12 +35,24 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Depends on**: Nothing (first phase)
 **Requirements**: FND-01, FND-02, FND-03, FND-04, FND-05, FND-06, FND-07, DATA-01, DATA-02, DATA-03, DATA-05, BRW-01, BRW-02, BRW-03, BRW-04, BRW-05, BRW-06, BRW-07, BRW-08, BRW-09, BRW-10, BRW-11, CARD-01, CARD-08, PERF-01
 **Success Criteria** (what must be TRUE):
-  1. User opens `/browse` and sees a responsive grid of character card fronts (2 columns under 640 px, 3 from 640 to 1024 px, 4 to 5 above). Each card shows an avatar (placeholder while loading, fallback tile if the image fails), a two-line-clamped name, a status badge with text, the species and a favourite star. The page sits in the dark cosmic theme with a sticky header (wordmark, Browse and Collection links, "N collected" counter) and a footer with the API link and fan-project disclaimer.
+  1. User opens `/browse` and sees a responsive grid of character card fronts (2 columns under 640 px, 3 from 640 to 1024 px, 4 to 5 above). Each card shows an avatar (placeholder while loading, fallback tile if the image fails), a two-line-clamped name, a status badge with text and the species, with an empty slot reserved for the favourite star (CARD-01 is partial in Phase 1 per decision D-03; the star itself ships with CARD-06 in Phase 2). The page sits in the dark cosmic theme with a sticky header (wordmark, Browse and Collection links, "N collected" counter) and a footer with the API link and fan-project disclaimer.
   2. Keyboard and mobile users can move around: "Skip to content" is the first focusable element, focused elements are never hidden behind the sticky header, the hamburger menu closes on Escape, outside tap and route change while trapping focus and returning it to the button, and after client-side navigation focus lands on the page `h1` and the document title updates. The star-field drifts slowly and is static under reduced motion.
   3. User can type "rick" and see only matching names after a 300 ms debounce, combine it with status, gender and species chips (one value per group, click an active chip to deselect), clear the search with the × button or Escape, and reset everything with "Clear all". Refresh, shared links and browser back keep the search, filters, loaded pages and scroll position. The Human chip never shows a Humanoid and its total equals the number of exact-Human results. A superseded search never overwrites newer results, and revisiting a recent query does not refetch.
   4. User can scroll to the bottom, or press "Load more", to load the next page with no duplicate cards. "N characters" and "20 more characters loaded" are announced politely, changing search or filters returns to page 1 at the top of the grid, and reaching the last page (a 404 on page > 1) ends loading with no error and no empty state.
   5. User sees skeleton cards while loading, the "No characters in this dimension" empty state with a clear-filters button when nothing matches (never the error state), and an error state with Retry, including "You appear to be offline" wording. A failed next-page load keeps the existing cards and shows an inline retry.
-**Plans**: TBD
+**Plans:** 10 plans (7 waves)
+
+Plans:
+- [ ] 01-01-PLAN.md — Test harness and typed API client (live read), ends with the TanStack Query legitimacy checkpoint (wave 1)
+- [ ] 01-02-PLAN.md — Dark cosmic shell: tokens and contrast gate, Inter, skip link, footer, star field, interim / and /collection, smoke runner (wave 1)
+- [ ] 01-03-PLAN.md — Walking skeleton: /browse reads real characters via TanStack Query; Status chip writes the URL (wave 2)
+- [ ] 01-04-PLAN.md — Sticky header, nav and counter, focus-to-h1 on navigation, accessible mobile menu (wave 2)
+- [ ] 01-05-PLAN.md — Final card front, avatars with fallback, next/image config, grid; Back-navigation spike decision (wave 3)
+- [ ] 01-06-PLAN.md — Browse policies as tested pure functions: exact-species load steps, derived total, announcement strings, query defaults tests (wave 3)
+- [ ] 01-07-PLAN.md — Debounced search, all chip groups, Clear all toolbar, reset to page 1 and scroll to grid top (wave 4)
+- [ ] 01-08-PLAN.md — Exact-species steps and derived Human total wired in, settled live-region announcements (wave 5)
+- [ ] 01-09-PLAN.md — Loading skeletons, empty state, error and offline states (wave 6)
+- [ ] 01-10-PLAN.md — Infinite scroll and Load more, end of list, next-page error, Back restore per spike (wave 7)
 **UI hint**: yes
 
 ### Phase 2: Card effects + Portal
@@ -90,7 +102,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Browse | 0/TBD | Not started | - |
+| 1. Foundation + Browse | 0/10 | Planned | - |
 | 2. Card effects + Portal | 0/TBD | Not started | - |
 | 3. Detail + Collection | 0/TBD | Not started | - |
 | 4. Light polish | 0/TBD | Not started | - |
