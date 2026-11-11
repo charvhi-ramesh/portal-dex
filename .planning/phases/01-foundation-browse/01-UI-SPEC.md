@@ -158,7 +158,7 @@ Rules: text on any accent or status fill is always navy `#0A0F1F`, never white. 
 ### Star-field background (FND-07)
 
 - One fixed, `aria-hidden`, `pointer-events: none` layer behind everything (`z-index: -1`).
-- Three stacked layers of `radial-gradient` 1 px dots on transparent tiles of 240, 360 and 520 px, dot colour `#C9D4FF` at **no more than 35% opacity** (keeps any text that crosses a dot well above 4.5:1; worst case about 9:1).
+- Three stacked layers of `radial-gradient` 1 px dots on transparent tiles of 240, 360 and 520 px, dot colour `#C9D4FF` at **no more than 15% opacity** (amended from 35% after Phase 1 research: at 35%, `text-muted` fell to 3.57:1 and blue link text to 2.85:1 where a dot sits behind text; 15% keeps every text pair at 4.5:1 or better, and `scripts/check-contrast.ts` must verify the composited worst case).
 - Drift: each layer is oversized by one tile and animated with `transform: translate3d()` by exactly one tile on a **linear, infinite** loop of 90 s, 150 s and 240 s (seamless). Only `transform` animates. `will-change: transform` on the three layers only.
 - Under `prefers-reduced-motion: reduce`: `animation: none` (static dots).
 
