@@ -126,13 +126,71 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (filled by roadmapper) | | |
+| FND-01 | Phase 1 | Pending |
+| FND-02 | Phase 1 | Pending |
+| FND-03 | Phase 1 | Pending |
+| FND-04 | Phase 1 | Pending |
+| FND-05 | Phase 1 | Pending |
+| FND-06 | Phase 1 | Pending |
+| FND-07 | Phase 1 | Pending |
+| DATA-01 | Phase 1 | Pending |
+| DATA-02 | Phase 1 | Pending |
+| DATA-03 | Phase 1 | Pending |
+| DATA-04 | Phase 3 | Pending |
+| DATA-05 | Phase 1 | Pending |
+| BRW-01 | Phase 1 | Pending |
+| BRW-02 | Phase 1 | Pending |
+| BRW-03 | Phase 1 | Pending |
+| BRW-04 | Phase 1 | Pending |
+| BRW-05 | Phase 1 | Pending |
+| BRW-06 | Phase 1 | Pending |
+| BRW-07 | Phase 1 | Pending |
+| BRW-08 | Phase 1 | Pending |
+| BRW-09 | Phase 1 | Pending |
+| BRW-10 | Phase 1 | Pending |
+| BRW-11 | Phase 1 | Pending |
+| CARD-01 | Phase 1 | Pending |
+| CARD-02 | Phase 2 | Pending |
+| CARD-03 | Phase 2 | Pending |
+| CARD-04 | Phase 2 | Pending |
+| CARD-05 | Phase 2 | Pending |
+| CARD-06 | Phase 2 | Pending |
+| CARD-07 | Phase 2 | Pending |
+| CARD-08 | Phase 1 | Pending |
+| HOME-01 | Phase 2 | Pending |
+| HOME-02 | Phase 2 | Pending |
+| HOME-03 | Phase 2 | Pending |
+| HOME-04 | Phase 2 | Pending |
+| HOME-05 | Phase 2 | Pending |
+| HOME-06 | Phase 2 | Pending |
+| DET-01 | Phase 3 | Pending |
+| DET-02 | Phase 3 | Pending |
+| DET-03 | Phase 3 | Pending |
+| DET-04 | Phase 3 | Pending |
+| DET-05 | Phase 3 | Pending |
+| DET-06 | Phase 3 | Pending |
+| COL-01 | Phase 2 | Pending |
+| COL-02 | Phase 2 | Pending |
+| COL-03 | Phase 2 | Pending |
+| COL-04 | Phase 3 | Pending |
+| COL-05 | Phase 3 | Pending |
+| COL-06 | Phase 3 | Pending |
+| A11Y-01 | Phase 3 | Pending |
+| A11Y-02 | Phase 3 | Pending |
+| A11Y-03 | Phase 3 | Pending |
+| A11Y-04 | Phase 3 | Pending |
+| A11Y-05 | Phase 3 | Pending |
+| A11Y-06 | Phase 3 | Pending |
+| PERF-01 | Phase 1 | Pending |
+| PERF-02 | Phase 3 | Pending |
+| DEP-01 | Phase 3 | Pending |
+| POL-01 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 59 total
-- Mapped to phases: 0
-- Unmapped: 59 ⚠️
+- Mapped to phases: 59 ✓ (Phase 1: 25, Phase 2: 15, Phase 3: 18, Phase 4: 1)
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-11-11*
-*Last updated: 2026-11-11 after initial definition*
+*Last updated: 2026-11-11 after roadmap creation*
