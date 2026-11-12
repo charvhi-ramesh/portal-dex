@@ -32,10 +32,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **BRW-01**: User can see characters in a responsive grid (2 columns under 640 px, 3 from 640–1024 px, 4–5 above)
 - [x] **BRW-02**: User can search by name with a 300 ms debounce, and clear it with a × button or Escape
 - [x] **BRW-03**: User can filter by status, gender and species chips (one value per group), and deselect an active chip by clicking it
-- [ ] **BRW-04**: Species chips (Human, Alien, Humanoid, Mythological Creature, Robot, Animal) match exactly, so Human excludes Humanoid, and the displayed total is derived correctly
+- [x] **BRW-04**: Species chips (Human, Alien, Humanoid, Mythological Creature, Robot, Animal) match exactly, so Human excludes Humanoid, and the displayed total is derived correctly
 - [x] **BRW-05**: User can reset search and filters with "Clear all"
 - [x] **BRW-06**: Search and filters live in the URL query, so refresh, back and shared links preserve them (typing replaces history, chip changes push)
-- [ ] **BRW-07**: User sees "N characters" announced via `aria-live="polite"`
+- [x] **BRW-07**: User sees "N characters" announced via `aria-live="polite"`
 - [ ] **BRW-08**: User can load more by scrolling (IntersectionObserver) or via a "Load more" button, with no duplicates, and an announcement when more are loaded
 - [ ] **BRW-09**: User sees skeleton cards while loading, an empty state ("No characters in this dimension" with a clear-filters button), and an error state with Retry (including offline wording)
 - [x] **BRW-10**: Changing search or filters resets to page 1 and scrolls to the top of the grid
@@ -141,10 +141,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BRW-01 | Phase 1 | Pending |
 | BRW-02 | Phase 1 | Complete |
 | BRW-03 | Phase 1 | Complete |
-| BRW-04 | Phase 1 | Pending |
+| BRW-04 | Phase 1 | Complete |
 | BRW-05 | Phase 1 | Complete |
 | BRW-06 | Phase 1 | Complete |
-| BRW-07 | Phase 1 | Pending |
+| BRW-07 | Phase 1 | Complete |
 | BRW-08 | Phase 1 | Pending |
 | BRW-09 | Phase 1 | Pending |
 | BRW-10 | Phase 1 | Complete |

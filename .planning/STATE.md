@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 1
 current_phase_name: Foundation + Browse
 status: executing
-stopped_at: Completed 01-07-PLAN.md
-last_updated: "2026-11-12T02:55:19.248Z"
+stopped_at: Completed 01-08-PLAN.md
+last_updated: "2026-11-12T03:05:10.885Z"
 last_activity: 2026-11-12
 last_activity_desc: Phase 1 execution started
-state_head: 63ac4b68d84b178b6a49deade8763ba8e9d29622
+state_head: 2573ffd914413c1cdc9373f46605eaceb6b65345
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 10
-  completed_plans: 7
+  completed_plans: 8
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-11)
 ## Current Position
 
 Phase: 1 (Foundation + Browse) — EXECUTING
-Plan: 8 of 10
+Plan: 9 of 10
 Status: Ready to execute
 Last activity: 2026-11-12 — Phase 1 execution started
 
@@ -63,6 +63,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P06 | 12 min | 2 tasks | 7 files |
 | Phase 01 P05 | n/a (resumed) | 3 tasks | 7 files |
 | Phase 01 P07 | 7 min | 2 tasks | 5 files |
+| Phase 01 P08 | 8 min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -88,6 +89,8 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-05: Back-navigation spike answered native-ok; plan 01-10 adds no history or scroll code, only re-verifies Back restore with several loaded pages
 - [Phase 01]: 01-05: card markup locked in final D-01 form (static front, empty star and link slots, inert back); CARD-01 partial, star ships with CARD-06 in Phase 2
 - [Phase 01]: 01-07: Clear via x/Escape uses history replace (search edit); Clear all and chips push; scroll to toolbar only when top < 64 px
+- [Phase 01]: 01-08: a failed Humanoid count request leaves the Human total null (Counting... shown, nothing announced) rather than showing a Humanoid-inflated number
+- [Phase 01]: 01-08: the humanoid count query is enabled only for the Human chip with firstCount > 0; live-region announce() is a stable callback written through a ref after a 500 ms settle
 
 ### Pending Todos
 
@@ -111,6 +114,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-12T02:55:19.155Z
-Stopped at: Completed 01-07-PLAN.md
+Last session: 2026-11-12T03:05:10.774Z
+Stopped at: Completed 01-08-PLAN.md
 Resume file: None
