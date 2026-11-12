@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { CardAvatar } from "@/components/card/card-avatar";
 import { CardBack } from "@/components/card/card-back";
+import { FavouriteStar } from "@/components/card/favourite-star";
 import type { Character } from "@/lib/api/types";
 import { labelFor } from "@/lib/browse/filters";
 import { cardLabel, displayName } from "@/lib/card/card-text";
@@ -60,7 +61,9 @@ export function CharacterCard({
           </p>
         </div>
       </div>
-      <div data-slot="star" inert={flipped} className="card-slot card-front" />
+      <div data-slot="star" inert={flipped} className="card-slot card-front">
+        <FavouriteStar id={character.id} name={character.name} />
+      </div>
       <div data-slot="link" inert={!flipped} className="card-slot card-back">
         <Link
           href={`/character/${character.id}`}
