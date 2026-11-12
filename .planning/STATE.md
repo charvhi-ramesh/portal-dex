@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 1
 current_phase_name: Foundation + Browse
 status: executing
-stopped_at: Completed 01-04-PLAN.md
-last_updated: "2026-11-12T01:49:19.738Z"
+stopped_at: Completed 01-06-PLAN.md
+last_updated: "2026-11-12T02:01:06.395Z"
 last_activity: 2026-11-12
 last_activity_desc: Phase 1 execution started
-state_head: d0128fb7c5c02df137c09827231e4c73ac82f780
+state_head: 778bc24cb76ef8f48092c8946ee2e93419532879
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 10
-  completed_plans: 4
+  completed_plans: 5
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-11)
 ## Current Position
 
 Phase: 1 (Foundation + Browse) — EXECUTING
-Plan: 5 of 10
+Plan: 6 of 10
 Status: Ready to execute
 Last activity: 2026-11-12 — Phase 1 execution started
 
@@ -60,6 +60,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P02 | 8 min | 2 tasks | 9 files |
 | Phase 01 P03 | n/a (resumed) | 2 tasks | 11 files |
 | Phase 01 P04 | 12 min | 2 tasks | 6 files |
+| Phase 01 P06 | 12 min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -80,6 +81,8 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-03: native History API confined to useBrowseUrl so the router fallback is a one-file change; q trimmed in parse and serialize
 - [Phase 01]: 01-04: Mobile menu panel transitions opacity and translate (Tailwind 4 translate utilities set the translate property, not transform)
 - [Phase 01]: 01-04: Guarded render-phase setOpenPath(null) discards a stale menu open request so narrowing the window never reopens it
+- [Phase 01]: 01-06: kept RESEARCH A4 load-step design (fill to 20 exact items, 4 API page cap) confined to fetchBrowseStep; reversible
+- [Phase 01]: 01-06: deriveTotal returns 0 when firstCount is 0 before the Human/humanoid branch; null only while the humanoid count is unknown
 
 ### Pending Todos
 
@@ -103,6 +106,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-12T01:49:19.654Z
-Stopped at: Completed 01-04-PLAN.md
+Last session: 2026-11-12T02:01:06.319Z
+Stopped at: Completed 01-06-PLAN.md
 Resume file: None
