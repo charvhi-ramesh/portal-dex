@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { useEffect, useReducer, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import { motion } from "motion/react";
 import { LiveRegion, useAnnouncer } from "@/components/browse/live-region";
 import { useOnlineStatus } from "@/components/browse/use-online-status";
 import { CharacterCard } from "@/components/card/character-card";
+import { PortalDisc } from "@/components/home/portal-disc";
+import { useMediaQuery } from "@/components/layout/use-media-query";
 import {
   INITIAL_PORTAL_STATE,
   SPIN_MS,
@@ -25,9 +28,6 @@ const PRESS =
   "transition-transform duration-150 active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100";
 const PRIMARY_BUTTON = `inline-flex min-h-12 items-center justify-center rounded-full bg-blue px-6 text-base font-bold text-bg hover:bg-blue-hover aria-disabled:cursor-default aria-disabled:opacity-60 ${PRESS}`;
 const SECONDARY_BUTTON = `inline-flex min-h-12 items-center justify-center rounded-full border border-border-ui bg-surface px-6 text-base font-bold text-text hover:bg-surface-raised aria-disabled:cursor-default aria-disabled:opacity-60 ${PRESS}`;
-
-const CONIC =
-  "bg-[conic-gradient(from_0deg,var(--color-teal),var(--color-blue),var(--color-purple),var(--color-teal))]";
 
 function abortError(): DOMException {
   return new DOMException("The spin was cancelled", "AbortError");
@@ -59,6 +59,8 @@ export function PortalStage() {
   const queryClient = useQueryClient();
   const { regionRef, announce } = useAnnouncer();
   const online = useOnlineStatus();
+  // The server snapshot is "reduced", so the first paint is static; motion starts after hydration.
+  const reduced = useMediaQuery("(prefers-reduced-motion: reduce)", true);
   const [state, dispatch] = useReducer(portalReducer, INITIAL_PORTAL_STATE);
 
   const busyRef = useRef(false);
@@ -106,7 +108,7 @@ export function PortalStage() {
       activeKeyRef.current = options.queryKey;
       const [character] = await Promise.all([
         queryClient.fetchQuery(options),
-        wait(SPIN_MS, signal),
+        wait(reduced ? 0 : SPIN_MS, signal),
       ]);
       if (signal.aborted) {
         dispatch({ type: "cancel", token });
@@ -165,24 +167,23 @@ export function PortalStage() {
           }}
           className={`relative grid size-[min(70vw,22rem)] place-items-center rounded-full aria-disabled:cursor-default [grid-area:1/1] ${PRESS}`}
         >
-          <span aria-hidden="true" className="absolute inset-0">
-            <span className={`absolute inset-0 rounded-full opacity-60 blur-2xl ${CONIC}`} />
-            <span className={`absolute inset-[6%] rounded-full ${CONIC}`} />
-            <span className="absolute inset-[24%] rounded-full bg-bg" />
-          </span>
+          <PortalDisc spinning={spinning} reduced={reduced} />
           <span className="relative z-10 inline-flex min-h-12 items-center rounded-full bg-bg px-6 font-bold text-text">
             Open portal
           </span>
         </button>
 
         {character !== null ? (
-          <div
+          <motion.div
             ref={revealRef}
             key={character.id}
+            initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.2 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: reduced ? 0.2 : 0.4, ease: "easeOut" }}
             className="relative z-10 w-[min(56vw,15rem)] [grid-area:1/1]"
           >
             <CharacterCard character={character} eager />
-          </div>
+          </motion.div>
         ) : null}
       </div>
 
