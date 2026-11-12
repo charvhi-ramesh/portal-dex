@@ -3,12 +3,17 @@
 
 import { queryOptions } from "@tanstack/react-query";
 import { fetchCharactersByIds } from "../api/characters.ts";
+import { toIdList } from "../api/normalize.ts";
 import type { Character } from "../api/types.ts";
 
-// RED stub: the key ignores the IDs.
+/**
+ * The key is the sorted, deduped ID list, so re-ordering favourites never refetches and
+ * a response for an older list can never fill the current list's key (concurrency).
+ * IDs reach the request path only through toIdList inside fetchCharactersByIds (T-03-05).
+ */
 export function collectionOptions(ids: readonly number[]) {
   return queryOptions({
-    queryKey: ["characters", "collection", ""] as const,
+    queryKey: ["characters", "collection", toIdList(ids).join(",")] as const,
     queryFn: ({ signal }): Promise<Character[]> =>
       fetchCharactersByIds(ids, signal),
   });
