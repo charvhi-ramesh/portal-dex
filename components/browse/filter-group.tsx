@@ -16,7 +16,7 @@ export function FilterGroup({
   onToggle(value: string): void;
 }) {
   return (
-    <div role="group" aria-labelledby={`${id}-label`} className="mt-6">
+    <div role="group" aria-labelledby={`${id}-label`}>
       <span
         id={`${id}-label`}
         className="block text-sm font-bold text-text-muted"
