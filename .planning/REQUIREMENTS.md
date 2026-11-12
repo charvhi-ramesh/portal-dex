@@ -23,7 +23,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **DATA-01**: Typed API client fetches character lists (with filters and pages), single characters, multi-ID characters, multi-ID episodes and locations
 - [x] **DATA-02**: Multi-ID responses are always normalised to arrays and tolerate missing IDs
-- [ ] **DATA-03**: A 404 on page 1 of a filtered query is "no results", and a 404 on page > 1 means "no more pages"
+- [x] **DATA-03**: A 404 on page 1 of a filtered query is "no results", and a 404 on page > 1 means "no more pages"
 - [ ] **DATA-04**: Route IDs are validated as positive integers before any fetch, and invalid IDs show the 404 page without calling the API
 - [x] **DATA-05**: TanStack Query uses `staleTime` of at least 1 hour and no refetch on window focus, with stale requests cancelled via `AbortSignal`
 
@@ -36,10 +36,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **BRW-05**: User can reset search and filters with "Clear all"
 - [x] **BRW-06**: Search and filters live in the URL query, so refresh, back and shared links preserve them (typing replaces history, chip changes push)
 - [x] **BRW-07**: User sees "N characters" announced via `aria-live="polite"`
-- [ ] **BRW-08**: User can load more by scrolling (IntersectionObserver) or via a "Load more" button, with no duplicates, and an announcement when more are loaded
-- [ ] **BRW-09**: User sees skeleton cards while loading, an empty state ("No characters in this dimension" with a clear-filters button), and an error state with Retry (including offline wording)
+- [x] **BRW-08**: User can load more by scrolling (IntersectionObserver) or via a "Load more" button, with no duplicates, and an announcement when more are loaded
+- [x] **BRW-09**: User sees skeleton cards while loading, an empty state ("No characters in this dimension" with a clear-filters button), and an error state with Retry (including offline wording)
 - [x] **BRW-10**: Changing search or filters resets to page 1 and scrolls to the top of the grid
-- [ ] **BRW-11**: Going back from a character page restores filters, loaded pages and scroll position
+- [x] **BRW-11**: Going back from a character page restores filters, loaded pages and scroll position
 
 ### Card
 
@@ -135,7 +135,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FND-07 | Phase 1 | Complete |
 | DATA-01 | Phase 1 | Complete |
 | DATA-02 | Phase 1 | Complete |
-| DATA-03 | Phase 1 | Pending |
+| DATA-03 | Phase 1 | Complete |
 | DATA-04 | Phase 3 | Pending |
 | DATA-05 | Phase 1 | Complete |
 | BRW-01 | Phase 1 | Complete |
@@ -145,10 +145,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BRW-05 | Phase 1 | Complete |
 | BRW-06 | Phase 1 | Complete |
 | BRW-07 | Phase 1 | Complete |
-| BRW-08 | Phase 1 | Pending |
-| BRW-09 | Phase 1 | Pending |
+| BRW-08 | Phase 1 | Complete |
+| BRW-09 | Phase 1 | Complete |
 | BRW-10 | Phase 1 | Complete |
-| BRW-11 | Phase 1 | Pending |
+| BRW-11 | Phase 1 | Complete |
 | CARD-01 | Phase 1 (partial: card front without the favourite star per D-03; the star moved to CARD-06, Phase 2) | Pending |
 | CARD-02 | Phase 2 | Pending |
 | CARD-03 | Phase 2 | Pending |
