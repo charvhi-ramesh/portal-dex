@@ -7,6 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { CharacterGrid } from "@/components/browse/character-grid";
+import { EmptyPanel } from "@/components/browse/empty-panel";
 import { ErrorPanel } from "@/components/browse/error-panel";
 import { FilterBar } from "@/components/browse/filter-bar";
 import { LiveRegion, useAnnouncer } from "@/components/browse/live-region";
@@ -114,6 +115,13 @@ export function BrowseView() {
     }
   }
 
+  // The Clear filters button unmounts once results return, so focus moves to the search
+  // field, the start of the controls the user will refine next.
+  function clearFilters() {
+    applyFilters(EMPTY_FILTERS, "push");
+    requestAnimationFrame(() => document.getElementById("browse-search")?.focus());
+  }
+
   return (
     <>
       <LiveRegion regionRef={regionRef} />
@@ -139,6 +147,12 @@ export function BrowseView() {
         </div>
       ) : query.isPending ? (
         <ul aria-busy="true" className="mt-4 min-h-[60vh]" />
+      ) : characters.length === 0 && !query.hasNextPage ? (
+        // BRW-01: zero results render no list at all. A page-1 404 is an empty step
+        // (DATA-03), so it always lands here and never in the error branch above.
+        <div className="mt-4 py-8">
+          <EmptyPanel onClearFilters={clearFilters} />
+        </div>
       ) : (
         <div className="mt-4">
           <CharacterGrid characters={characters} />
