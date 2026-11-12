@@ -12,6 +12,7 @@ import { ErrorPanel } from "@/components/browse/error-panel";
 import { FilterBar } from "@/components/browse/filter-bar";
 import {
   LoadMore,
+  LOAD_MORE_ID,
   NEXT_RETRY_ID,
   type LoadTrigger,
 } from "@/components/browse/load-more";
@@ -116,46 +117,68 @@ export function BrowseView() {
 
   // BRW-08: one next load step. Guarded here as well as in LoadMore, so a double press
   // or an observer report racing a button press never starts a second request. Only a
-  // button press (Load more or the inline Retry) asks for focus to follow the new cards;
-  // scroll-triggered loads never move focus (planning decision 3).
+  // button press (Load more or the inline Retry) asks for focus to follow the new cards.
+  // A scroll-started load moves focus only to repair a loss (WR-03): focus was in the load
+  // area when it started and the control holding it unmounted.
   const endNoteRef = useRef<HTMLParagraphElement>(null);
+  const loadAreaRef = useRef<HTMLDivElement>(null);
   // WR-06: the request carries the filter key it was made for, so a filter change before
   // the load settles can never turn it into a focus move inside another result set.
-  const pendingFocus = useRef<{ key: string; index: number } | null>(null);
+  const pendingFocus = useRef<{
+    key: string;
+    index: number;
+    trigger: LoadTrigger;
+    hadFocus: boolean;
+  } | null>(null);
+  function requestFocusHandOff(trigger: LoadTrigger) {
+    pendingFocus.current = {
+      key: currentKey,
+      index: characterCount,
+      trigger,
+      hadFocus: loadAreaRef.current?.contains(document.activeElement) ?? false,
+    };
+  }
   const characterCount = characters.length;
   const pageCount = query.data?.pages.length ?? 0;
   const { hasNextPage, isFetchingNextPage, isFetchNextPageError } = query;
   function loadMore(trigger: LoadTrigger) {
     if (!hasNextPage || isFetchingNextPage) return;
-    if (trigger === "button") {
-      pendingFocus.current = { key: currentKey, index: characterCount };
-    }
+    requestFocusHandOff(trigger);
     void query.fetchNextPage();
   }
   // BRW-09: existing cards are never cleared by a next-page failure; Retry fetches the
   // same next step once.
   function retryNextPage() {
     if (isFetchingNextPage) return;
-    pendingFocus.current = { key: currentKey, index: characterCount };
+    requestFocusHandOff("button");
     void query.fetchNextPage();
   }
 
-  // Focus hand-off once a button-started load settles. The first new card's flip button
-  // (named by the card label) takes focus. If nothing was added and the button unmounted,
-  // the end note takes it; after a failure the inline Retry does. Otherwise the
-  // still-mounted Load more button keeps focus. A request made for another filter key is
-  // dropped without moving focus (WR-06).
+  // Focus hand-off once a load settles. It runs after a button press, and after a scroll
+  // load only when focus was in the load area and is now lost (on body or detached), so
+  // a user who is typing or tabbing elsewhere is never pulled away. In order: the inline
+  // Retry after a failure, the first new card's flip button (named by the card label),
+  // the end note when the list ended, else the Load more button (a Retry that added no
+  // card). A request made for another filter key is dropped without moving focus (WR-06).
   useEffect(() => {
     const pending = pendingFocus.current;
     if (pending === null || isFetchingNextPage) return;
     pendingFocus.current = null;
     if (pending.key !== currentKey) return;
+    const active = document.activeElement;
+    const focusLost =
+      active === null || active === document.body || !active.isConnected;
+    if (pending.trigger === "scroll" && !(pending.hadFocus && focusLost)) return;
     if (isFetchNextPageError) {
       document.getElementById(NEXT_RETRY_ID)?.focus();
       return;
     }
     if (focusCard(gridRef.current?.children[pending.index])) return;
-    if (!hasNextPage) endNoteRef.current?.focus();
+    if (!hasNextPage) {
+      endNoteRef.current?.focus();
+    } else {
+      document.getElementById(LOAD_MORE_ID)?.focus();
+    }
   }, [
     characterCount,
     isFetchingNextPage,
@@ -282,16 +305,18 @@ export function BrowseView() {
               <SkeletonGrid variant="row" />
             </div>
           ) : null}
-          <LoadMore
-            hasNextPage={hasNextPage}
-            isFetchingNextPage={isFetchingNextPage}
-            isFetchNextPageError={isFetchNextPageError}
-            hasItems={characterCount > 0}
-            pageCount={pageCount}
-            onLoadMore={loadMore}
-            onRetry={retryNextPage}
-            endNoteRef={endNoteRef}
-          />
+          <div ref={loadAreaRef}>
+            <LoadMore
+              hasNextPage={hasNextPage}
+              isFetchingNextPage={isFetchingNextPage}
+              isFetchNextPageError={isFetchNextPageError}
+              hasItems={characterCount > 0}
+              pageCount={pageCount}
+              onLoadMore={loadMore}
+              onRetry={retryNextPage}
+              endNoteRef={endNoteRef}
+            />
+          </div>
         </div>
       )}
     </>

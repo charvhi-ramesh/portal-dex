@@ -32,6 +32,9 @@ const SECONDARY_BUTTON =
 /** Id of the inline Retry button, so BrowseView can hand focus to it after a failed press. */
 export const NEXT_RETRY_ID = "load-more-retry";
 
+/** Id of the Load more button, so BrowseView can hand focus back to it when nothing new arrived. */
+export const LOAD_MORE_ID = "load-more-button";
+
 // Infinite scroll plus its keyboard fallback (BRW-08), the inline next-page error
 // (BRW-09) and the calm end-of-list note (DATA-03). The sentinel observer is re-created
 // whenever the page count or a fetch state changes: a fresh observer reports its initial
@@ -112,6 +115,7 @@ export function LoadMore({
         // Stays mounted while loading, with aria-disabled rather than disabled, so a
         // keyboard user keeps focus on it.
         <button
+          id={LOAD_MORE_ID}
           type="button"
           aria-disabled={isFetchingNextPage}
           onClick={() => {
