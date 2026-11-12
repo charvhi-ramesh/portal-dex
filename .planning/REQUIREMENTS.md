@@ -44,12 +44,12 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Card
 
 - [ ] **CARD-01**: User sees a card front with avatar, name (two-line clamp), status badge with text, species and favourite star
-- [ ] **CARD-02**: User can flip a card by click, tap, Enter or Space to see species, type (if any), gender, origin, last location, episode count and a "View details →" link
-- [ ] **CARD-03**: Flip control is a sibling of the star and link (no nested interactive elements), the hidden face is `inert`, and flip state is exposed with `aria-pressed`
-- [ ] **CARD-04**: Card frame reflects status: Alive teal glow with pulse, Dead grey with 60% desaturated avatar, unknown purple→pink shimmer
+- [x] **CARD-02**: User can flip a card by click, tap, Enter or Space to see species, type (if any), gender, origin, last location, episode count and a "View details →" link
+- [x] **CARD-03**: Flip control is a sibling of the star and link (no nested interactive elements), the hidden face is `inert`, and flip state is exposed with `aria-pressed`
+- [x] **CARD-04**: Card frame reflects status: Alive teal glow with pulse, Dead grey with 60% desaturated avatar, unknown purple→pink shimmer
 - [ ] **CARD-05**: On desktop pointer, card tilts up to ±12° toward the cursor with a holographic sheen and resets smoothly, disabled on touch and under reduced motion
 - [ ] **CARD-06**: User can toggle a favourite with the star without flipping the card, via `aria-pressed` and labels like "Add Rick Sanchez to collection"
-- [ ] **CARD-07**: Every card is focusable with a visible focus ring that stays visible on every frame colour, and exposes a label like "Rick Sanchez, Alive, Human card, press to flip"
+- [x] **CARD-07**: Every card is focusable with a visible focus ring that stays visible on every frame colour, and exposes a label like "Rick Sanchez, Alive, Human card, press to flip"
 - [x] **CARD-08**: Avatars show a placeholder while loading and a fallback tile if the image fails
 
 ### Home & Portal
@@ -150,12 +150,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BRW-10 | Phase 1 | Complete |
 | BRW-11 | Phase 1 | Complete |
 | CARD-01 | Phase 1 (partial: card front without the favourite star per D-03; the star moved to CARD-06, Phase 2) | Pending |
-| CARD-02 | Phase 2 | Pending |
-| CARD-03 | Phase 2 | Pending |
-| CARD-04 | Phase 2 | Pending |
+| CARD-02 | Phase 2 | Complete |
+| CARD-03 | Phase 2 | Complete |
+| CARD-04 | Phase 2 | Complete |
 | CARD-05 | Phase 2 | Pending |
 | CARD-06 | Phase 2 | Pending |
-| CARD-07 | Phase 2 | Pending |
+| CARD-07 | Phase 2 | Complete |
 | CARD-08 | Phase 1 | Complete |
 | HOME-01 | Phase 2 | Complete |
 | HOME-02 | Phase 2 | Complete |
