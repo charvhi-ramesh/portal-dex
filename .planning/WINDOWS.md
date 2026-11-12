@@ -1,10 +1,10 @@
 ---
 schema_version: 1
-open_count: 1
+open_count: 0
 waived_count: 0
-fixed_count: 0
+fixed_count: 1
 total_count: 1
-last_updated: 2026-11-12T00:58:14.218Z
+last_updated: 2026-11-12T06:12:48.890Z
 ---
 
 # Broken Windows Ledger
@@ -15,7 +15,7 @@ last_updated: 2026-11-12T00:58:14.218Z
 
 | id | phase | kind | file | line | description | status | reason | recorded_at | resolved_at |
 |----|-------|------|------|------|-------------|--------|--------|-------------|-------------|
-| 1 | 01 | unrun-verify | scripts/smoke.ts |  | 01-02 Task 2 human-check (browser Tab, 320/1280 px layout, reduced-motion toggle) not run; needs a browser | open |  | 2026-11-12T00:58:14.218Z |  |
+| 1 | 01 | unrun-verify | scripts/smoke.ts |  | 01-02 Task 2 human-check (browser Tab, 320/1280 px layout, reduced-motion toggle) not run; needs a browser | fixed |  | 2026-11-12T00:58:14.218Z | 2026-11-12T06:12:48.890Z |
 
 ````json
 [
@@ -26,10 +26,10 @@ last_updated: 2026-11-12T00:58:14.218Z
     "file": "scripts/smoke.ts",
     "line": null,
     "description": "01-02 Task 2 human-check (browser Tab, 320/1280 px layout, reduced-motion toggle) not run; needs a browser",
-    "status": "open",
+    "status": "fixed",
     "reason": "",
     "recorded_at": "2026-11-12T00:58:14.218Z",
-    "resolved_at": null,
+    "resolved_at": "2026-11-12T06:12:48.890Z",
     "milestone": null
   }
 ]
