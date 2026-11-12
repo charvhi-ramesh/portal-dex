@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 2
 current_phase_name: Card effects + Portal
 status: executing
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-11-12T08:01:28.529Z"
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-11-12T08:20:31.040Z"
 last_activity: 2026-11-12
 last_activity_desc: Phase 2 execution started
-state_head: 1312c4e226be6d38b4ad1fd11afae06a9d51f2ac
+state_head: 7649e52165fa8bc38e4a0d9cedaccbbe79a28509
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 14
-  completed_plans: 11
+  completed_plans: 13
   percent: 25
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-11)
 ## Current Position
 
 Phase: 2 (Card effects + Portal) — EXECUTING
-Plan: 2 of 4
+Plan: 3 of 4
 Status: Ready to execute
 Last activity: 2026-11-12 — Phase 2 execution started
 
@@ -67,6 +67,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 01 P09 | 15 min | 3 tasks | 9 files |
 | Phase 01 P10 | 10 min | 3 tasks | 3 files |
 | Phase 02 P02 | 20min (continuation) | 3 tasks | 8 files |
+| Phase 02 P03 | 20 min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -100,6 +101,8 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-10: onLoadMore carries a trigger (button or scroll); only button presses and inline Retry move focus after a next-step load
 - [Phase 02]: 02-02: motion approved by the user at exactly 14.12.0 and installed with --save-exact; no other package added
 - [Phase 02]: 02-02: PortalDisc rotates a motion.span (not div) because it sits inside the portal button; reduced motion is the server snapshot so first paint is static
+- [Phase 02]: 02-03: favourite star name is constant ('Add {name} to collection') with aria-pressed carrying state — A swapped label plus pressed state is announced as a contradiction by screen readers
+- [Phase 02]: 02-03: header counter is 'N collected' below 640 px and 'N / {total} collected' from 640 px once total loaded (user accepted) — Fits the 320 px header budget; never shows N / 0
 
 ### Pending Todos
 
@@ -123,6 +126,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-12T08:01:26.772Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-11-12T08:20:29.600Z
+Stopped at: Completed 02-03-PLAN.md
 Resume file: None
