@@ -66,7 +66,13 @@ Plans:
   3. User can toggle a favourite with the star without flipping the card (`aria-pressed`, label "Add Rick Sanchez to collection"). The header counter updates immediately wherever the toggle happens, favourites persist across reloads and sync across tabs, and corrupt or unavailable `localStorage` never crashes the app.
   4. User opens Home and sees a centred conic-gradient portal with glow and idle rotation (about 8 s per turn), a headline, an explanation and a "Start browsing" button. Clicking the portal or the "Open portal" button spins it up for about 1.2 s, then a valid random character's card scales out face up, and the character's name is announced via an `aria-live` region. The portal is fully keyboard-operable.
   5. User can "Spin again" (disabled during a spin or fetch, no overlapping spins or requests, never the same character twice in a row) or open "View details". Under reduced motion the portal does not spin and the card fades in. If the random fetch fails, user sees an inline error with Retry and the portal returns to idle.
-**Plans**: TBD
+**Plans:** 4 plans (2 waves)
+
+Plans:
+- [ ] 02-01-PLAN.md — Card flip with accessible back face and View details link, card label, status rarity frames (glow pulse, grayscale, shimmer) and a focus ring on every frame (wave 1)
+- [ ] 02-02-PLAN.md — Home portal: random reveal with announcement, Spin again, View details, inline Retry; Motion legitimacy checkpoint, then idle rotation, spin-up and scale-out with reduced-motion fade (wave 1)
+- [ ] 02-03-PLAN.md — Favourite star on every card, defensive localStorage store with cross-tab sync, live header counter with total (wave 2)
+- [ ] 02-04-PLAN.md — Desktop-pointer tilt with holographic sheen on Browse and Home cards, off for touch and reduced motion (wave 2)
 **UI hint**: yes
 
 ### Phase 3: Detail + Collection
@@ -103,6 +109,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + Browse | 10/10 | Complete    | 2026-11-12 |
-| 2. Card effects + Portal | 0/TBD | Not started | - |
+| 2. Card effects + Portal | 0/4 | Planned | - |
 | 3. Detail + Collection | 0/TBD | Not started | - |
 | 4. Light polish | 0/TBD | Not started | - |
