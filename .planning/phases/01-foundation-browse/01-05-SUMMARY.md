@@ -152,7 +152,10 @@ status: complete
 
 ## Deviations from Plan
 
-None - plan executed exactly as written.
+No behavioural deviations. Two small additions beyond the plan text, reported by the original executor at its checkpoint:
+
+- The `inert` back-face and the star and link slots carry `data-slot` attributes (`star`, `link`) as stable hooks for Phase 2. Not in the plan.
+- The loading and error placeholders in `BrowseView` keep `mt-12`. Only the real grid sits 16 px below the filter group, as the plan says. Plan 01-07 owns skeleton and error layout.
 
 ## Issues Encountered
 
