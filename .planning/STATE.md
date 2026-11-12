@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 current_phase: 2
 current_phase_name: Card effects + Portal
-status: planning
-stopped_at: Phase 1 complete, ready to plan Phase 2
-last_updated: "2026-11-12T06:11:31.393Z"
+status: executing
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-11-12T08:01:28.529Z"
 last_activity: 2026-11-12
-last_activity_desc: Phase 1 complete, transitioned to Phase 2
-state_head: e16b92a0b9a4b1bacd6cdc4c0699bd089a290493
+last_activity_desc: Phase 2 execution started
+state_head: 1312c4e226be6d38b4ad1fd11afae06a9d51f2ac
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 10
-  completed_plans: 10
+  total_plans: 14
+  completed_plans: 11
   percent: 25
 ---
 
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-11-11)
 
 **Core value:** Browsing and collecting characters must feel delightful: cards that tilt, flip and glow, and a portal that reveals a random character, in a dark cosmic UI that stays fast and fully accessible (WCAG 2.1 AA).
-**Current focus:** Phase 1 — Foundation + Browse
+**Current focus:** Phase 2 — Card effects + Portal
 
 ## Current Position
 
-Phase: 2 — Card effects + Portal
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-11-12 — Phase 1 complete, transitioned to Phase 2
+Phase: 2 (Card effects + Portal) — EXECUTING
+Plan: 2 of 4
+Status: Ready to execute
+Last activity: 2026-11-12 — Phase 2 execution started
 
 Progress: [███░░░░░░░] 25%
 
@@ -66,6 +66,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 01 P08 | 8 min | 2 tasks | 4 files |
 | Phase 01 P09 | 15 min | 3 tasks | 9 files |
 | Phase 01 P10 | 10 min | 3 tasks | 3 files |
+| Phase 02 P02 | 20min (continuation) | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -97,6 +98,8 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-09: Skeleton badge and species bars use the real card's CSS heights (24.8 px, 20 px), not the plan's 29 px and 21 px
 - [Phase 01]: 01-10: native-ok spike option applied; Back restore relies on Activity retention and the query cache, no scroll-memory or router code
 - [Phase 01]: 01-10: onLoadMore carries a trigger (button or scroll); only button presses and inline Retry move focus after a next-step load
+- [Phase 02]: 02-02: motion approved by the user at exactly 14.12.0 and installed with --save-exact; no other package added
+- [Phase 02]: 02-02: PortalDisc rotates a motion.span (not div) because it sits inside the portal button; reduced motion is the server snapshot so first paint is static
 
 ### Pending Todos
 
@@ -120,6 +123,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-12T03:36:39.674Z
-Stopped at: Phase 1 complete, ready to plan Phase 2
+Last session: 2026-11-12T08:01:26.772Z
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None

@@ -54,12 +54,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Home & Portal
 
-- [ ] **HOME-01**: User sees a centred conic-gradient portal with glow, idle rotation (~8 s per turn), headline, explanation and a "Start browsing" button
-- [ ] **HOME-02**: User can open the portal (click or "Open portal" button) to spin it up for ~1.2 s and see a random character's card scale out face up
-- [ ] **HOME-03**: User can "Spin again" (no overlapping spins, never the same character twice in a row) or "View details" below the revealed card
-- [ ] **HOME-04**: Portal is keyboard-operable and announces the revealed name via an `aria-live` region
-- [ ] **HOME-05**: Under reduced motion the portal does not spin and the card fades in
-- [ ] **HOME-06**: If the random fetch fails, user sees an inline error with Retry
+- [x] **HOME-01**: User sees a centred conic-gradient portal with glow, idle rotation (~8 s per turn), headline, explanation and a "Start browsing" button
+- [x] **HOME-02**: User can open the portal (click or "Open portal" button) to spin it up for ~1.2 s and see a random character's card scale out face up
+- [x] **HOME-03**: User can "Spin again" (no overlapping spins, never the same character twice in a row) or "View details" below the revealed card
+- [x] **HOME-04**: Portal is keyboard-operable and announces the revealed name via an `aria-live` region
+- [x] **HOME-05**: Under reduced motion the portal does not spin and the card fades in
+- [x] **HOME-06**: If the random fetch fails, user sees an inline error with Retry
 
 ### Character Detail
 
@@ -157,12 +157,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CARD-06 | Phase 2 | Pending |
 | CARD-07 | Phase 2 | Pending |
 | CARD-08 | Phase 1 | Complete |
-| HOME-01 | Phase 2 | Pending |
-| HOME-02 | Phase 2 | Pending |
-| HOME-03 | Phase 2 | Pending |
-| HOME-04 | Phase 2 | Pending |
-| HOME-05 | Phase 2 | Pending |
-| HOME-06 | Phase 2 | Pending |
+| HOME-01 | Phase 2 | Complete |
+| HOME-02 | Phase 2 | Complete |
+| HOME-03 | Phase 2 | Complete |
+| HOME-04 | Phase 2 | Complete |
+| HOME-05 | Phase 2 | Complete |
+| HOME-06 | Phase 2 | Complete |
 | DET-01 | Phase 3 | Pending |
 | DET-02 | Phase 3 | Pending |
 | DET-03 | Phase 3 | Pending |
