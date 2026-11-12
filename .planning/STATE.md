@@ -1,18 +1,18 @@
 ---
 gsd_state_version: "1.0"
-current_phase: 2
-current_phase_name: Card effects + Portal
+current_phase: 3
+current_phase_name: Detail + Collection
 status: executing
-stopped_at: Completed 02-04-PLAN.md
-last_updated: "2026-11-12T08:35:57.889Z"
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-11-12T10:18:29.839Z"
 last_activity: 2026-11-12
-last_activity_desc: Phase 2 execution started
-state_head: 9e85fe0ed9d0fec8d087f3529cbe2b2cadc0ab96
+last_activity_desc: Phase 3 execution started
+state_head: 74edc1bd461cb659aed3c0502f1ef76b65147e3a
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 14
-  completed_plans: 14
+  total_plans: 19
+  completed_plans: 15
   percent: 25
 ---
 
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-11-11)
 
 **Core value:** Browsing and collecting characters must feel delightful: cards that tilt, flip and glow, and a portal that reveals a random character, in a dark cosmic UI that stays fast and fully accessible (WCAG 2.1 AA).
-**Current focus:** Phase 2 — Card effects + Portal
+**Current focus:** Phase 3 — Detail + Collection
 
 ## Current Position
 
-Phase: 2 (Card effects + Portal) — EXECUTING
-Plan: 4 of 4
+Phase: 3 (Detail + Collection) — EXECUTING
+Plan: 2 of 5
 Status: Ready to execute
-Last activity: 2026-11-12 — Phase 2 execution started
+Last activity: 2026-11-12 — Phase 3 execution started
 
 Progress: [███░░░░░░░] 25%
 
@@ -69,6 +69,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 02 P02 | 20min (continuation) | 3 tasks | 8 files |
 | Phase 02 P03 | 20 min | 2 tasks | 7 files |
 | Phase 02 P04 | 12 min | 2 tasks | 5 files |
+| Phase 03 P01 | 40 min | 3 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -106,6 +107,8 @@ Recent decisions affecting current work:
 - [Phase 02]: 02-03: header counter is 'N collected' below 640 px and 'N / {total} collected' from 640 px once total loaded (user accepted) — Fits the 320 px header budget; never shows N / 0
 - [Phase 02]: 02-04: tilt pointer handlers and rect measurement sit on the untransformed outer div, not the rotating motion.div — A rotated element's hit area changes with its own rotation, causing enter/leave flicker at tilted edges
 - [Phase 02]: 02-04: sheen position follows the pointer directly; only sheen opacity and rotation are springs (stiffness 300, damping 30) — Spot tracks the cursor without lag; Phase 4 may tune spring values
+- [Phase 03]: 03-01: generateStaticParams returns one sample so params is read at top level; build accepted it, no Suspense fallback
+- [Phase 03]: 03-01: invalid IDs return HTTP 200 on first request (PPR shell) and 404 on repeat; plan's documented 200+noindex fallback accepted, first-hit 404 left as an open user decision
 
 ### Pending Todos
 
@@ -129,6 +132,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-12T08:35:56.399Z
-Stopped at: Completed 02-04-PLAN.md
+Last session: 2026-11-12T10:18:28.364Z
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None

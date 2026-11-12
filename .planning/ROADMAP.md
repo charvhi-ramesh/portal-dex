@@ -86,10 +86,10 @@ Plans:
   3. `/character/abc`, `/character/0`, `/character/99999` and any unknown route show the portal-themed 404, and `abc` and `0` make no API request.
   4. User can see all favourites in the card grid on `/collection` (one multi-ID request, missing IDs tolerated). Removing one animates the card out, moves focus to the next card (or the heading if none remain) and announces "{name} removed from collection". An empty collection shows links to Browse and the portal.
   5. The app is live on Vercel, and an axe check plus a manual keyboard and screen-reader pass report no WCAG 2.1 AA violations on any page. Every interactive element has a visible 2 px teal focus ring, reduced motion disables tilt, spin, drift, pulse and morph (flip becomes a crossfade), status is never conveyed by colour alone, touch targets are at least 44 × 44 px, the layout reflows at 320 px and 200% zoom, and desktop Lighthouse scores 90+ for Performance and Accessibility on the deployed URL.
-**Plans:** 5 plans (4 waves; run one after another on the main tree)
+**Plans:** 1/5 plans executed (4 waves; run one after another on the main tree)
 
 Plans:
-- [ ] 03-01-PLAN.md — Detail route: server-side ID validation with real 404s, hero with favourite star, "{name} · Portal Dex" title, portal-themed 404, smoke status tokens (wave 1)
+- [x] 03-01-PLAN.md — Detail route: server-side ID validation with real 404s, hero with favourite star, "{name} · Portal Dex" title, portal-themed 404, smoke status tokens (wave 1)
 - [ ] 03-02-PLAN.md — Collection: favourites in one multi-ID request, favourited order, empty state, animated removal with focus hand-off and announcement (wave 2)
 - [ ] 03-03-PLAN.md — Episode strip (labelled scroll region), "Also found at" residents row, card-to-detail View Transitions morph with fade fallback (wave 2)
 - [ ] 03-04-PLAN.md — Accessibility pass: @a11y served-HTML gate, stylesheet motion test, WR-02/WR-03/WR-06 focus fixes, Lighthouse a11y as the approved axe substitute (wave 3)
@@ -117,5 +117,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Foundation + Browse | 10/10 | Complete    | 2026-11-12 |
 | 2. Card effects + Portal | 4/4 | In Progress | - |
-| 3. Detail + Collection | 0/5 | Planned | - |
+| 3. Detail + Collection | 1/5 | In Progress | - |
 | 4. Light polish | 0/TBD | Not started | - |

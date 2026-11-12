@@ -24,7 +24,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **DATA-01**: Typed API client fetches character lists (with filters and pages), single characters, multi-ID characters, multi-ID episodes and locations
 - [x] **DATA-02**: Multi-ID responses are always normalised to arrays and tolerate missing IDs
 - [x] **DATA-03**: A 404 on page 1 of a filtered query is "no results", and a 404 on page > 1 means "no more pages"
-- [ ] **DATA-04**: Route IDs are validated as positive integers before any fetch, and invalid IDs show the 404 page without calling the API
+- [x] **DATA-04**: Route IDs are validated as positive integers before any fetch, and invalid IDs show the 404 page without calling the API
 - [x] **DATA-05**: TanStack Query uses `staleTime` of at least 1 hour and no refetch on window focus, with stale requests cancelled via `AbortSignal`
 
 ### Browse
@@ -63,12 +63,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Character Detail
 
-- [ ] **DET-01**: User can see a hero with large avatar, name, status, species, type, gender, origin, last location and a favourite button, with unknown origin/location as plain text
+- [x] **DET-01**: User can see a hero with large avatar, name, status, species, type, gender, origin, last location and a favourite button, with unknown origin/location as plain text
 - [ ] **DET-02**: Avatar morphs from the card into the hero via View Transitions, with a fade fallback if it is not clean within ~30 minutes and under reduced motion
 - [ ] **DET-03**: User sees a horizontally scrollable episode strip ("S01E01 · Pilot"), sorted by ID, with a chip count equal to `character.episode.length`
 - [ ] **DET-04**: User sees an "Also found at {location}" row of up to 12 other residents (deterministic, via one multi-ID request) linking to their pages, hidden if the location is unknown or there are no other residents
-- [ ] **DET-05**: Page title is "{name} · Portal Dex"
-- [ ] **DET-06**: User sees the custom portal-themed 404 for invalid or non-existent character IDs and unknown routes
+- [x] **DET-05**: Page title is "{name} · Portal Dex"
+- [x] **DET-06**: User sees the custom portal-themed 404 for invalid or non-existent character IDs and unknown routes
 
 ### Collection
 
@@ -136,7 +136,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-01 | Phase 1 | Complete |
 | DATA-02 | Phase 1 | Complete |
 | DATA-03 | Phase 1 | Complete |
-| DATA-04 | Phase 3 | Pending |
+| DATA-04 | Phase 3 | Complete |
 | DATA-05 | Phase 1 | Complete |
 | BRW-01 | Phase 1 | Complete |
 | BRW-02 | Phase 1 | Complete |
@@ -163,12 +163,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | HOME-04 | Phase 2 | Complete |
 | HOME-05 | Phase 2 | Complete |
 | HOME-06 | Phase 2 | Complete |
-| DET-01 | Phase 3 | Pending |
+| DET-01 | Phase 3 | Complete |
 | DET-02 | Phase 3 | Pending |
 | DET-03 | Phase 3 | Pending |
 | DET-04 | Phase 3 | Pending |
-| DET-05 | Phase 3 | Pending |
-| DET-06 | Phase 3 | Pending |
+| DET-05 | Phase 3 | Complete |
+| DET-06 | Phase 3 | Complete |
 | COL-01 | Phase 2 | Complete |
 | COL-02 | Phase 2 | Complete |
 | COL-03 | Phase 2 | Complete |
