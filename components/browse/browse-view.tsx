@@ -119,42 +119,50 @@ export function BrowseView() {
   // button press (Load more or the inline Retry) asks for focus to follow the new cards;
   // scroll-triggered loads never move focus (planning decision 3).
   const endNoteRef = useRef<HTMLParagraphElement>(null);
-  const pendingFocusIndex = useRef<number | null>(null);
+  // WR-06: the request carries the filter key it was made for, so a filter change before
+  // the load settles can never turn it into a focus move inside another result set.
+  const pendingFocus = useRef<{ key: string; index: number } | null>(null);
   const characterCount = characters.length;
   const pageCount = query.data?.pages.length ?? 0;
   const { hasNextPage, isFetchingNextPage, isFetchNextPageError } = query;
   function loadMore(trigger: LoadTrigger) {
     if (!hasNextPage || isFetchingNextPage) return;
-    if (trigger === "button") pendingFocusIndex.current = characterCount;
+    if (trigger === "button") {
+      pendingFocus.current = { key: currentKey, index: characterCount };
+    }
     void query.fetchNextPage();
   }
   // BRW-09: existing cards are never cleared by a next-page failure; Retry fetches the
   // same next step once.
   function retryNextPage() {
     if (isFetchingNextPage) return;
-    pendingFocusIndex.current = characterCount;
+    pendingFocus.current = { key: currentKey, index: characterCount };
     void query.fetchNextPage();
   }
 
-  // Focus hand-off once a button-started load settles. The first new card takes focus
-  // (an `article` with tabindex -1, standard ring). If nothing was added and the button
-  // unmounted, the end note takes it; after a failure the inline Retry does. Otherwise
-  // the still-mounted Load more button keeps focus.
+  // Focus hand-off once a button-started load settles. The first new card's flip button
+  // (named by the card label) takes focus. If nothing was added and the button unmounted,
+  // the end note takes it; after a failure the inline Retry does. Otherwise the
+  // still-mounted Load more button keeps focus. A request made for another filter key is
+  // dropped without moving focus (WR-06).
   useEffect(() => {
-    const index = pendingFocusIndex.current;
-    if (index === null || isFetchingNextPage) return;
-    pendingFocusIndex.current = null;
+    const pending = pendingFocus.current;
+    if (pending === null || isFetchingNextPage) return;
+    pendingFocus.current = null;
+    if (pending.key !== currentKey) return;
     if (isFetchNextPageError) {
       document.getElementById(NEXT_RETRY_ID)?.focus();
       return;
     }
-    const card = gridRef.current?.children[index]?.querySelector("article");
-    if (card instanceof HTMLElement) {
-      card.focus();
-    } else if (!hasNextPage) {
-      endNoteRef.current?.focus();
-    }
-  }, [characterCount, isFetchingNextPage, hasNextPage, isFetchNextPageError]);
+    if (focusCard(gridRef.current?.children[pending.index])) return;
+    if (!hasNextPage) endNoteRef.current?.focus();
+  }, [
+    characterCount,
+    isFetchingNextPage,
+    hasNextPage,
+    isFetchNextPageError,
+    currentKey,
+  ]);
 
   // X4: announce the real number of cards a finished next step added, whatever started
   // it. A filter change, the first page and a first mount are baselines, not "more".
