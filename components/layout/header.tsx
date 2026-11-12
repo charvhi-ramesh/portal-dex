@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
+import { CollectedCounter } from "./collected-counter";
 import { MenuButtonFallback, MobileMenu } from "./mobile-menu";
 import { NavLinkList, NavLinks } from "./nav-links";
 
@@ -18,10 +19,7 @@ export function Header() {
             <NavLinks variant="bar" />
           </Suspense>
         </nav>
-        {/* COL-03 (Phase 2) makes this count live from the favourites store (D-03). */}
-        <p className="ml-auto min-w-[12ch] rounded-full border border-border-ui bg-surface px-3 py-1 text-center text-sm leading-normal font-bold text-text">
-          0 collected
-        </p>
+        <CollectedCounter />
         <Suspense fallback={<MenuButtonFallback />}>
           <MobileMenu />
         </Suspense>
