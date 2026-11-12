@@ -11,9 +11,10 @@ const BUTTON = `inline-flex min-h-12 items-center rounded-full px-6 font-bold ${
 export function NotFoundContent() {
   return (
     <section className="flex flex-col items-center pt-8 text-center sm:pt-12">
+      <span aria-hidden="true" className="portal-404" />
       <h1
         tabIndex={-1}
-        className="text-2xl leading-[1.2] font-bold focus:outline-none sm:text-4xl"
+        className="mt-8 text-2xl leading-[1.2] font-bold focus:outline-none sm:text-4xl"
       >
         {NOT_FOUND_HEADING}
       </h1>

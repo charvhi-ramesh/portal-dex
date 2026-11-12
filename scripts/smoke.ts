@@ -1,25 +1,36 @@
 // Production smoke runner. Requires a prior `npm run build`.
-// Usage: node scripts/smoke.ts route:/path "expected text" ... [route:/other "expected" ...]
+// Usage: node scripts/smoke.ts route:/path "expected text" ... [route404:/other "expected" ...]
 // (route tokens carry a `route:` prefix because Git Bash rewrites bare leading-slash arguments.)
+// `route:/path` expects status 200; `routeNNN:/path` (a three-digit status, e.g. `route404:/path`)
+// expects that status. An expectation starting with "!" and more text, e.g. "!absent text", asserts
+// the body does NOT contain the rest. A group with an explicit status may have no expectations
+// (the status is the check); a plain `route:` group needs at least one.
 // Starts `next start` on 127.0.0.1 (free OS-assigned port unless SMOKE_PORT is set), fetches each
-// route and checks status 200 plus every expected substring. Prints SMOKE OK (0) or SMOKE FAIL (1).
+// route and checks the status plus every expectation. Prints SMOKE OK (0) or SMOKE FAIL (1).
 import { spawn, spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { createServer } from "node:net";
 import type { AddressInfo } from "node:net";
 import { join } from "node:path";
 
-type Group = { route: string; expected: string[] };
+type Group = { route: string; status: number; explicitStatus: boolean; expected: string[] };
 
 const USAGE =
-  'Usage: node scripts/smoke.ts route:/path "expected text" ... [route:/other "expected" ...]';
+  'Usage: node scripts/smoke.ts route:/path "expected text" "!absent text" ... [route404:/path "expected" ...]';
+const ROUTE_TOKEN = /^route([0-9]{3})?:(.*)$/;
 const HOST = "127.0.0.1";
 
 function parseArgs(argv: string[]): Group[] | null {
   const groups: Group[] = [];
   for (const arg of argv) {
-    if (arg.startsWith("route:")) {
-      groups.push({ route: arg.slice("route:".length), expected: [] });
+    const token = ROUTE_TOKEN.exec(arg);
+    if (token) {
+      groups.push({
+        route: token[2],
+        status: token[1] ? Number(token[1]) : 200,
+        explicitStatus: token[1] !== undefined,
+        expected: [],
+      });
     } else if (groups.length === 0) {
       return null; // an argument before the first route token
     } else {
@@ -27,7 +38,9 @@ function parseArgs(argv: string[]): Group[] | null {
     }
   }
   if (groups.length === 0) return null;
-  if (groups.some((g) => g.route === "" || g.expected.length === 0)) return null;
+  const incomplete = (g: Group) =>
+    g.route === "" || (!g.explicitStatus && g.expected.length === 0);
+  if (groups.some(incomplete)) return null;
   return groups;
 }
 
@@ -111,13 +124,16 @@ async function main(): Promise<number> {
         failed = true;
         continue;
       }
-      if (status !== 200) {
-        console.log(`FAIL ${group.route} status ${status}`);
+      if (status !== group.status) {
+        console.log(`FAIL ${group.route} status ${status} (expected ${group.status})`);
         failed = true;
         continue;
       }
+      if (group.explicitStatus) console.log(`PASS ${group.route} status ${status}`);
       for (const text of group.expected) {
-        if (body.includes(text)) {
+        const absent = text.length > 1 && text.startsWith("!");
+        const needle = absent ? text.slice(1) : text;
+        if (body.includes(needle) !== absent) {
           console.log(`PASS ${group.route} ${text}`);
         } else {
           console.log(`FAIL ${group.route} ${text}`);

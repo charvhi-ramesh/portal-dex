@@ -167,6 +167,69 @@ body {
 }
 
 /*
+ * 404 portal (DET-06): a conic ring with a navy centre, drawn in CSS only. The ring turns once
+ * per 8 s with transform alone; the glow is a static blur that is never animated. `isolation`
+ * keeps the glow (z-index -1) behind the ring but above the page even when the animation, and
+ * with it the transform stacking context, is off under reduced motion.
+ */
+.portal-404 {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: min(60vw, 14rem);
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    var(--color-teal),
+    var(--color-blue),
+    var(--color-purple),
+    var(--color-teal)
+  );
+  animation: portal-404-turn 8s linear infinite;
+}
+
+.portal-404::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    var(--color-teal),
+    var(--color-blue),
+    var(--color-purple),
+    var(--color-teal)
+  );
+  filter: blur(24px);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.portal-404::after {
+  content: "";
+  position: absolute;
+  inset: 24%;
+  border-radius: 9999px;
+  background: var(--color-bg);
+}
+
+@keyframes portal-404-turn {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-404 {
+    animation: none;
+  }
+}
+
+/*
  * Skeleton counts by breakpoint, shared by the static Suspense fallback and the client
  * view. The grid list holds 10 items and shows 4 / 6 / 8 / 10 (2 x the 2 / 3 / 4 / 5
  * columns); the row list holds 5 and shows 2 / 3 / 4 / 5. The base rule hides everything
