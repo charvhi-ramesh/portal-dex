@@ -1,16 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   useInfiniteQuery,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import { CharacterGrid } from "@/components/browse/character-grid";
+import { ErrorPanel } from "@/components/browse/error-panel";
 import { FilterBar } from "@/components/browse/filter-bar";
 import { LiveRegion, useAnnouncer } from "@/components/browse/live-region";
 import { ResultsToolbar } from "@/components/browse/results-toolbar";
 import { useBrowseUrl } from "@/components/browse/use-browse-url";
+import { useOnlineStatus } from "@/components/browse/use-online-status";
 import { countAnnouncement } from "@/lib/browse/announce";
 import {
   EMPTY_FILTERS,
@@ -62,6 +64,23 @@ export function BrowseView() {
   const lastAnnouncedKey = useRef<string | null>(null);
   const currentKey = filtersKey(filters);
   const isPending = query.isPending;
+
+  // BRW-09: a first-page failure shows the error panel. TanStack resets a data-less query
+  // to "pending" while it refetches, which would unmount the focused Retry button, so
+  // the key being retried keeps the panel mounted (button aria-disabled) until the retry
+  // settles. A different key never inherits it.
+  const online = useOnlineStatus();
+  const [retryKey, setRetryKey] = useState<string | null>(null);
+  const noData = query.data === undefined;
+  const retrying = noData && retryKey === currentKey;
+  const showError = noData && (query.isError || retrying);
+  function retry() {
+    if (query.isFetching) return;
+    const key = currentKey;
+    setRetryKey(key);
+    void query.refetch().then(() => setRetryKey((k) => (k === key ? null : k)));
+  }
+
   useEffect(() => {
     if (total === null || isPending) return;
     if (lastAnnouncedKey.current === currentKey) return;
@@ -105,16 +124,21 @@ export function BrowseView() {
         <ResultsToolbar
           ref={toolbarRef}
           count={total}
+          unavailable={showError}
           showClearAll={hasActiveFilters(filters)}
           onClearAll={() => applyFilters(EMPTY_FILTERS, "push")}
         />
       </div>
-      {query.isPending ? (
+      {showError ? (
+        <div className="mt-4 py-8">
+          <ErrorPanel
+            offline={!online}
+            retrying={query.isFetching}
+            onRetry={retry}
+          />
+        </div>
+      ) : query.isPending ? (
         <ul aria-busy="true" className="mt-4 min-h-[60vh]" />
-      ) : query.isError && query.data === undefined ? (
-        <p role="alert" className="mt-4">
-          {"Couldn't load characters."}
-        </p>
       ) : (
         <div className="mt-4">
           <CharacterGrid characters={characters} />

@@ -9,11 +9,14 @@ export function ResultsToolbar({
   count,
   showClearAll,
   onClearAll,
+  unavailable = false,
   ref,
 }: {
   count: number | null;
   showClearAll: boolean;
   onClearAll(): void;
+  /** The first page failed: show an empty count slot instead of a "Counting..." that never ends. */
+  unavailable?: boolean;
   ref?: Ref<HTMLDivElement>;
 }) {
   return (
@@ -22,7 +25,9 @@ export function ResultsToolbar({
       className="flex min-h-11 scroll-mt-20 items-center justify-between gap-2"
     >
       <p className="whitespace-nowrap">
-        {count === null ? (
+        {unavailable ? (
+          <span className="inline-block min-w-[16ch]" />
+        ) : count === null ? (
           <span className="inline-block min-w-[16ch] text-sm text-text-muted">
             Counting...
           </span>
