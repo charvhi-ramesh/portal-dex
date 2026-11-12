@@ -201,3 +201,105 @@ body {
     display: block;
   }
 }
+
+/*
+ * Card (CARD-02, CARD-03). The frame and clipping live on each face rather than on the
+ * article, because a backface-hidden 3D flip cannot show the right face when the rotating
+ * content is clipped by an ancestor with overflow hidden. The front face stays in flow and
+ * sets the card height, so the outer box matches CardSkeleton. Only transform and opacity
+ * ever transition.
+ */
+.card {
+  position: relative;
+  perspective: 800px;
+  border-radius: var(--radius-card);
+}
+
+.card[data-status="alive"] {
+  --card-frame: var(--color-teal);
+}
+
+.card[data-status="dead"] {
+  --card-frame: var(--color-grey);
+}
+
+.card[data-status="unknown"] {
+  --card-frame: var(--color-purple);
+}
+
+.card-face {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  border: 2px solid var(--card-frame);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  overflow: hidden;
+}
+
+/* Declared after .card-face so source order wins at equal specificity. */
+.card-back,
+.card-slot {
+  position: absolute;
+  inset: 0;
+}
+
+.card-slot {
+  z-index: 20;
+  pointer-events: none;
+}
+
+.card-flip {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  border-radius: var(--radius-card);
+  background: transparent;
+  cursor: pointer;
+}
+
+.card-front,
+.card-back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(-180deg);
+}
+
+.card[data-flipped="true"] .card-front {
+  transform: rotateY(180deg);
+}
+
+.card[data-flipped="true"] .card-back {
+  transform: rotateY(0deg);
+}
+
+/* Reduced motion: no rotation, a 200 ms opacity crossfade between the faces. */
+@media (prefers-reduced-motion: reduce) {
+  .card-front,
+  .card-back,
+  .card[data-flipped="true"] .card-front,
+  .card[data-flipped="true"] .card-back {
+    transform: none;
+    transition: opacity 200ms ease-out;
+  }
+
+  .card-back {
+    opacity: 0;
+  }
+
+  .card[data-flipped="true"] .card-back {
+    opacity: 1;
+  }
+
+  .card[data-flipped="true"] .card-front {
+    opacity: 0;
+  }
+}

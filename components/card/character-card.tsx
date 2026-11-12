@@ -1,6 +1,12 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
 import { CardAvatar } from "@/components/card/card-avatar";
+import { CardBack } from "@/components/card/card-back";
 import type { Character } from "@/lib/api/types";
 import { labelFor } from "@/lib/browse/filters";
+import { cardLabel, displayName } from "@/lib/card/card-text";
 
 function statusKey(status: Character["status"]): "alive" | "dead" | "unknown" {
   if (status === "Alive") return "alive";
@@ -8,9 +14,10 @@ function statusKey(status: Character["status"]): "alive" | "dead" | "unknown" {
   return "unknown";
 }
 
-// Final card markup (D-01). Phase 1 renders it static: the flip button is disabled and
-// aria-hidden, the star and link slots stay empty and the back face is inert. Phase 2 only
-// adds behaviour to this structure. API text is rendered as React children, never as HTML.
+// Final card markup (D-01 order). The flip button is a sibling of the star slot and the link
+// slot, never their ancestor, and the hidden face and its slot are inert. Frame, clipping and
+// the flip live on the faces (see app/globals.css), so the article only carries state. API
+// text is rendered as React children, never as HTML.
 export function CharacterCard({
   character,
   eager,
@@ -18,6 +25,7 @@ export function CharacterCard({
   character: Character;
   eager: boolean;
 }) {
+  const [flipped, setFlipped] = useState(false);
   const key = statusKey(character.status);
   const species = character.species.trim() || "Unknown species";
 
@@ -25,16 +33,17 @@ export function CharacterCard({
     <article
       tabIndex={-1}
       data-status={key}
-      className="group relative h-full overflow-hidden rounded-[20px] border-2 bg-surface focus:outline-2 focus:outline-offset-2 focus:outline-teal data-[status=alive]:border-teal data-[status=dead]:border-grey data-[status=unknown]:border-purple"
+      data-flipped={flipped ? "true" : "false"}
+      className="card group relative h-full"
     >
       <button
         type="button"
-        disabled
-        aria-hidden="true"
-        tabIndex={-1}
-        className="absolute inset-0 cursor-default bg-transparent"
+        aria-pressed={flipped}
+        aria-label={cardLabel(character)}
+        onClick={() => setFlipped((value) => !value)}
+        className="card-flip"
       />
-      <div className="relative">
+      <div inert={flipped} className="card-face card-front">
         <CardAvatar src={character.image} name={character.name} eager={eager} />
         <div className="flex flex-col gap-2 p-2 sm:p-4">
           <h2
@@ -51,16 +60,20 @@ export function CharacterCard({
           </p>
         </div>
       </div>
-      <div
-        aria-hidden="true"
-        data-slot="star"
-        className="pointer-events-none absolute top-2 right-2 size-11"
-      />
-      <div data-slot="link" />
-      <div
-        inert
-        className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]"
-      />
+      <div data-slot="star" inert={flipped} className="card-slot card-front" />
+      <div data-slot="link" inert={!flipped} className="card-slot card-back">
+        <Link
+          href={`/character/${character.id}`}
+          prefetch={false}
+          aria-label={`View details for ${displayName(character.name)}`}
+          className="pointer-events-auto absolute inset-x-2 bottom-2 inline-flex min-h-11 items-center justify-center gap-1 rounded-full bg-blue px-4 text-sm font-bold text-bg transition-transform duration-150 hover:bg-blue-hover active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100 sm:inset-x-4 sm:bottom-4"
+        >
+          View details <span aria-hidden="true">→</span>
+        </Link>
+      </div>
+      <div inert={!flipped} className="card-face card-back p-2 pb-16 sm:p-4 sm:pb-16">
+        <CardBack character={character} />
+      </div>
     </article>
   );
 }
