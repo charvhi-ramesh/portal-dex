@@ -1,7 +1,7 @@
 ---
 phase: 01-foundation-browse
 verified: 2026-11-12T06:30:00Z
-status: human_needed
+status: passed
 score: 20/23 must-haves verified
 covered_files:
   - ".planning/phases/01-foundation-browse/01-01-PLAN.md"
@@ -301,3 +301,10 @@ No gaps. Nothing in the codebase contradicts a roadmap success criterion, and th
 
 _Verified: 2026-11-12T06:30:00Z_
 _Verifier: Claude (gsd-verifier)_
+
+## Human sign-off
+
+Recorded 2026-11-12 from the user's reply to the Phase 1 sign-off decision ("Sign off and complete"):
+
+- The four judgment-tier prohibitions (network egress, no show assets or quotes, disclaimer on every route, reduced motion and no flashing) are signed off on the verifier's evidence. This is an informed acceptance of the verifier's non-authoritative read, not new test evidence; the UAT exercised reduced motion for the star field only.
+- The three user-deferred checks (screen-reader announcements, Load more focus hand-off, skeleton layout shift) are accepted as unconfirmed and deferred to the Phase 3 accessibility pass. WR-02, WR-03 and WR-06 remain open warnings related to the focus hand-off.
