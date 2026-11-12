@@ -50,7 +50,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **CARD-05**: On desktop pointer, card tilts up to ±12° toward the cursor with a holographic sheen and resets smoothly, disabled on touch and under reduced motion
 - [ ] **CARD-06**: User can toggle a favourite with the star without flipping the card, via `aria-pressed` and labels like "Add Rick Sanchez to collection"
 - [ ] **CARD-07**: Every card is focusable with a visible focus ring that stays visible on every frame colour, and exposes a label like "Rick Sanchez, Alive, Human card, press to flip"
-- [ ] **CARD-08**: Avatars show a placeholder while loading and a fallback tile if the image fails
+- [x] **CARD-08**: Avatars show a placeholder while loading and a fallback tile if the image fails
 
 ### Home & Portal
 
@@ -90,7 +90,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Performance & Delivery
 
-- [ ] **PERF-01**: `next/image` is configured with the `rickandmortyapi.com` avatar `remotePatterns`, correct `sizes`, and lazy loading below the fold
+- [x] **PERF-01**: `next/image` is configured with the `rickandmortyapi.com` avatar `remotePatterns`, correct `sizes`, and lazy loading below the fold
 - [ ] **PERF-02**: Desktop Lighthouse scores 90+ for Performance and Accessibility
 - [ ] **DEP-01**: App is deployed on Vercel (manual step needing the user's Vercel account)
 
@@ -156,7 +156,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CARD-05 | Phase 2 | Pending |
 | CARD-06 | Phase 2 | Pending |
 | CARD-07 | Phase 2 | Pending |
-| CARD-08 | Phase 1 | Pending |
+| CARD-08 | Phase 1 | Complete |
 | HOME-01 | Phase 2 | Pending |
 | HOME-02 | Phase 2 | Pending |
 | HOME-03 | Phase 2 | Pending |
@@ -181,7 +181,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | A11Y-04 | Phase 3 | Pending |
 | A11Y-05 | Phase 3 | Pending |
 | A11Y-06 | Phase 3 | Pending |
-| PERF-01 | Phase 1 | Pending |
+| PERF-01 | Phase 1 | Complete |
 | PERF-02 | Phase 3 | Pending |
 | DEP-01 | Phase 3 | Pending |
 | POL-01 | Phase 4 | Pending |

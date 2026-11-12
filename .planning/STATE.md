@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 1
 current_phase_name: Foundation + Browse
 status: executing
-stopped_at: Completed 01-06-PLAN.md
-last_updated: "2026-11-12T02:01:06.395Z"
+stopped_at: Completed 01-05-PLAN.md
+last_updated: "2026-11-12T02:42:11.231Z"
 last_activity: 2026-11-12
 last_activity_desc: Phase 1 execution started
-state_head: 778bc24cb76ef8f48092c8946ee2e93419532879
+state_head: 0f61f8053774e3dc76e69bf406f9070573c0084e
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 10
-  completed_plans: 5
+  completed_plans: 6
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-11)
 ## Current Position
 
 Phase: 1 (Foundation + Browse) — EXECUTING
-Plan: 6 of 10
+Plan: 7 of 10
 Status: Ready to execute
 Last activity: 2026-11-12 — Phase 1 execution started
 
@@ -61,6 +61,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P03 | n/a (resumed) | 2 tasks | 11 files |
 | Phase 01 P04 | 12 min | 2 tasks | 6 files |
 | Phase 01 P06 | 12 min | 2 tasks | 7 files |
+| Phase 01 P05 | n/a (resumed) | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -83,6 +84,8 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-04: Guarded render-phase setOpenPath(null) discards a stale menu open request so narrowing the window never reopens it
 - [Phase 01]: 01-06: kept RESEARCH A4 load-step design (fill to 20 exact items, 4 API page cap) confined to fetchBrowseStep; reversible
 - [Phase 01]: 01-06: deriveTotal returns 0 when firstCount is 0 before the Human/humanoid branch; null only while the humanoid count is unknown
+- [Phase 01]: 01-05: Back-navigation spike answered native-ok; plan 01-10 adds no history or scroll code, only re-verifies Back restore with several loaded pages
+- [Phase 01]: 01-05: card markup locked in final D-01 form (static front, empty star and link slots, inert back); CARD-01 partial, star ships with CARD-06 in Phase 2
 
 ### Pending Todos
 
@@ -106,6 +109,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-12T02:01:06.319Z
-Stopped at: Completed 01-06-PLAN.md
+Last session: 2026-11-12T02:42:11.076Z
+Stopped at: Completed 01-05-PLAN.md
 Resume file: None
