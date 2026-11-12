@@ -1,31 +1,42 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { FilterGroup } from "@/components/browse/filter-group";
+import { useBrowseUrl } from "@/components/browse/use-browse-url";
+import { STATUSES, toListParams, toggleFilter } from "@/lib/browse/filters";
 import { browseOptions } from "@/lib/query/options";
 
-// Tracer slice: one real API read. Plans 01-05 to 01-10 grow this view.
+// Walking-skeleton slice: one real API read and one URL write. Plans 01-05 to 01-10 grow this view.
 export function BrowseView() {
-  const query = useInfiniteQuery(browseOptions({}));
+  const { filters, pushFilters } = useBrowseUrl();
+  const query = useInfiniteQuery(browseOptions(toListParams(filters)));
   const characters =
     query.data?.pages.flatMap((page) => page?.results ?? []) ?? [];
 
-  if (query.isPending) {
-    return <ul aria-busy="true" className="mt-12 min-h-[60vh]" />;
-  }
-
-  if (query.isError && query.data === undefined) {
-    return (
-      <p role="alert" className="mt-12">
-        {"Couldn't load characters."}
-      </p>
-    );
-  }
-
   return (
-    <ul className="mt-12">
-      {characters.map((character) => (
-        <li key={character.id}>{character.name}</li>
-      ))}
-    </ul>
+    <>
+      <FilterGroup
+        id="status"
+        label="Status"
+        options={STATUSES}
+        value={filters.status}
+        onToggle={(value) =>
+          pushFilters(toggleFilter(filters, "status", value))
+        }
+      />
+      {query.isPending ? (
+        <ul aria-busy="true" className="mt-12 min-h-[60vh]" />
+      ) : query.isError && query.data === undefined ? (
+        <p role="alert" className="mt-12">
+          {"Couldn't load characters."}
+        </p>
+      ) : (
+        <ul className="mt-12">
+          {characters.map((character) => (
+            <li key={character.id}>{character.name}</li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 }
