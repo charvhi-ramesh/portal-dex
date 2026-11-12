@@ -1,5 +1,6 @@
 import type { Ref } from "react";
 import { CharacterCard } from "@/components/card/character-card";
+import { TiltFrame } from "@/components/card/tilt-frame";
 import type { Character } from "@/lib/api/types";
 
 // `ref` reaches the list so BrowseView can move focus to a newly added card (React 19
@@ -21,7 +22,9 @@ export function CharacterGrid({
     >
       {characters.map((character, index) => (
         <li key={character.id}>
-          <CharacterCard character={character} eager={index < 5} />
+          <TiltFrame>
+            <CharacterCard character={character} eager={index < 5} />
+          </TiltFrame>
         </li>
       ))}
     </ul>
