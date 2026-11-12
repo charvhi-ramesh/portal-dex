@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 3
 current_phase_name: Detail + Collection
 status: executing
-stopped_at: Completed 03-03-PLAN.md
-last_updated: "2026-11-12T10:52:37.789Z"
+stopped_at: Completed 03-04-PLAN.md (reduced scope)
+last_updated: "2026-11-12T11:05:52.010Z"
 last_activity: 2026-11-12
 last_activity_desc: Phase 3 execution started
-state_head: 9af303e7caf63f153245e7da06686e312c17686d
+state_head: 7d6d5eb2d777fc013f23672b68bc491e0fddd579
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 19
-  completed_plans: 17
+  completed_plans: 18
   percent: 25
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-11)
 ## Current Position
 
 Phase: 3 (Detail + Collection) — EXECUTING
-Plan: 4 of 5
+Plan: 5 of 5
 Status: Ready to execute
 Last activity: 2026-11-12 — Phase 3 execution started
 
@@ -72,6 +72,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 03 P01 | 40 min | 3 tasks | 11 files |
 | Phase 03 P02 | 15 min | 2 tasks | 7 files |
 | Phase 03 P03 | 35 min | 3 tasks | 13 files |
+| Phase 03 P04 | 20 min | 1 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -115,6 +116,7 @@ Recent decisions affecting current work:
 - [Phase 03]: 03-02: Collection query key is the sorted ID list with keepPreviousData; placeholder data holding no current favourite counts as loading, not empty
 - [Phase 03]: 03-03: whole card morphs into the hero avatar box (user decision 2026-11-12); browser-generated group width/height interpolation accepted as an exception
 - [Phase 03]: 03-03: seedCharacter writes the detail key only when absent, so View details renders the hero in the navigation commit
+- [Phase 03]: 03-04: scope reduced by the user for time; only WR-02, WR-03, WR-06 focus fixes built; static a11y gates skipped and A11Y-01 to A11Y-06 stay Pending until browser and Lighthouse UAT
 
 ### Pending Todos
 
@@ -138,6 +140,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-12T10:52:36.033Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-11-12T11:05:50.212Z
+Stopped at: Completed 03-04-PLAN.md (reduced scope)
 Resume file: None
