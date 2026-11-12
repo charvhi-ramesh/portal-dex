@@ -18,7 +18,7 @@ created: "2026-11-11"
 | Property | Value |
 |----------|-------|
 | **Framework** | `node:test` + `node:assert/strict` (built in, Node 26.13, runs `.ts` via type stripping; no new dependency) |
-| **Config file** | none. Wave 0 adds a `test` script to `package.json` and `allowImportingTsExtensions` to `tsconfig.json` |
+| **Config file** | none. Wave 0 adds a `test` script to `package.json` and `allowImportingTsExtensions` and `verbatimModuleSyntax` to `tsconfig.json` |
 | **Quick run command** | `npm test && npx tsc --noEmit && npm run lint` (per-task fast loop); single file: `node --test lib/browse/species.test.ts` |
 | **Slow gate command** | `npm run build && node scripts/smoke.ts route:/... "expected" ...` (per plan; exact commands in the `{plan}-GATE` rows below and in each plan's `<verification>` block) |
 | **Full suite command** | `npm test && node scripts/check-contrast.ts && npx tsc --noEmit && npm run lint && npm run build && node scripts/smoke.ts <cumulative expectations>` (phase gate `01-ALL-01`; full command in 01-10 `<verification>`) |
@@ -95,7 +95,7 @@ created: "2026-11-11"
 
 Research's Wave 0 gaps are scheduled in the earliest plans that can host them (execution waves start at 1; there is no separate wave 0):
 
-- [ ] `package.json` `test` script and `tsconfig.json` `allowImportingTsExtensions` plus `erasableSyntaxOnly` → plan 01-01 Task 1 (wave 1)
+- [ ] `package.json` `test` script and `tsconfig.json` `allowImportingTsExtensions`, `verbatimModuleSyntax` plus `erasableSyntaxOnly` → plan 01-01 Task 1 (wave 1)
 - [ ] Test files, each created by the task that first needs it (TDD-style, so no task references a missing test): `lib/api/client.test.ts` (01-01-T1), `lib/api/endpoints.test.ts` (01-01-T2), `lib/browse/filters.test.ts` (01-03-T2), `lib/config.test.ts` (01-05-T2), `lib/browse/species.test.ts` and `lib/browse/steps.test.ts` (01-06-T1), `lib/browse/announce.test.ts` and `lib/query/client.test.ts` (01-06-T2), `lib/query/options.test.ts` (01-08-T2)
 - [ ] `scripts/check-contrast.ts` parsing `app/globals.css`, including the composited 15% star dot (planning decision 1) → plan 01-02 Task 1 (wave 1)
 - [ ] `scripts/smoke.ts` production smoke runner (build + `next start` + HTML assertions) → plan 01-02 Task 1 (wave 1)
