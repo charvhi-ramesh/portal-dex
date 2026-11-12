@@ -141,6 +141,8 @@ function main(): number {
   for (const fg of ["grey", "purple"]) for (const bg of ["bg", "surface"]) pairs.push([fg, bg, 4.5]);
   for (const bg of ["bg", "surface", "surface-raised"]) pairs.push(["teal", bg, 3]);
   for (const fg of ["grey", "purple"]) for (const bg of ["surface", "surface-raised"]) pairs.push([fg, bg, 3]);
+  // The pink end of the unknown shimmer frame and the favourite star icon (plan 02-03).
+  for (const bg of ["bg", "surface", "surface-raised"]) pairs.push(["pink", bg, 3]);
   for (const bg of ["blue", "blue-hover", "teal", "grey", "purple", "pink"]) pairs.push(["bg", bg, 4.5]);
   for (const bg of ["bg", "surface", "surface-raised"]) pairs.push(["border-ui", bg, 3]);
   for (const fg of ["text", "text-muted", "blue"]) pairs.push([fg, "star-dot-composite", 4.5]);

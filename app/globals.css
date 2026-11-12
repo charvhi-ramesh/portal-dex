@@ -201,3 +201,265 @@ body {
     display: block;
   }
 }
+
+/*
+ * Card (CARD-02, CARD-03). The frame and clipping live on each face rather than on the
+ * article, because a backface-hidden 3D flip cannot show the right face when the rotating
+ * content is clipped by an ancestor with overflow hidden. The front face stays in flow and
+ * sets the card height, so the outer box matches CardSkeleton. Only transform and opacity
+ * ever transition.
+ */
+.card {
+  position: relative;
+  perspective: 800px;
+  border-radius: var(--radius-card);
+}
+
+.card[data-status="alive"] {
+  --card-frame: var(--color-teal);
+}
+
+.card[data-status="dead"] {
+  --card-frame: var(--color-grey);
+}
+
+.card[data-status="unknown"] {
+  --card-frame: var(--color-purple);
+}
+
+.card-face {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  border: 2px solid var(--card-frame);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+}
+
+/* Declared after .card-face so source order wins at equal specificity. */
+.card-back,
+.card-slot {
+  position: absolute;
+  inset: 0;
+}
+
+.card-slot {
+  z-index: 20;
+  pointer-events: none;
+}
+
+.card-flip {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  border-radius: var(--radius-card);
+  background: transparent;
+  cursor: pointer;
+}
+
+.card-front,
+.card-back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(-180deg);
+}
+
+.card[data-flipped="true"] .card-front {
+  transform: rotateY(180deg);
+}
+
+.card[data-flipped="true"] .card-back {
+  transform: rotateY(0deg);
+}
+
+/* Reduced motion: no rotation, a 200 ms opacity crossfade between the faces. */
+@media (prefers-reduced-motion: reduce) {
+  .card-front,
+  .card-back,
+  .card[data-flipped="true"] .card-front,
+  .card[data-flipped="true"] .card-back {
+    transform: none;
+    transition: opacity 200ms ease-out;
+  }
+
+  .card-back {
+    opacity: 0;
+  }
+
+  .card[data-flipped="true"] .card-back {
+    opacity: 1;
+  }
+
+  .card[data-flipped="true"] .card-front {
+    opacity: 0;
+  }
+}
+
+/*
+ * Rarity frames (CARD-04). Status is never carried by colour alone: the front keeps its text
+ * badge and the flip button's accessible name states the status. Each effect is a pseudo-
+ * element that never changes the card's box, and only opacity is animated. Both cycles last
+ * 2.4 s or more, so nothing changes luminance more than three times a second (WCAG 2.3.1).
+ */
+.card[data-status="alive"] {
+  --card-glow: rgb(111 242 210 / 0.45);
+}
+
+.card[data-status="dead"] {
+  --card-glow: rgb(138 147 166 / 0.45);
+}
+
+.card[data-status="unknown"] {
+  --card-glow: rgb(166 107 255 / 0.45);
+}
+
+/* Alive: a teal glow that pulses by opacity, just outside the 2 px frame. */
+.card[data-status="alive"] .card-face::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 0 16px 2px rgb(111 242 210 / 0.5);
+  pointer-events: none;
+  opacity: 0.55;
+  animation: frame-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes frame-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Dead: grey frame and a 60% grayscale photo (static). The initial fallback tile is not an img. */
+.card[data-status="dead"] .card-face img {
+  filter: grayscale(0.6);
+}
+
+/*
+ * Unknown: the frame border is drawn by two masked gradient layers (purple to pink and pink
+ * to purple) that crossfade by opacity.
+ */
+.card[data-status="unknown"] .card-face {
+  border-color: transparent;
+}
+
+.card[data-status="unknown"] .card-face::before,
+.card[data-status="unknown"] .card-face::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  padding: 2px;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.card[data-status="unknown"] .card-face::before {
+  background: linear-gradient(135deg, var(--color-purple), var(--color-pink));
+}
+
+.card[data-status="unknown"] .card-face::after {
+  background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+  opacity: 0;
+  animation: frame-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes frame-shimmer {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Hover and focus glow (SPEC section 6): a status-coloured halo that fades in by opacity. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: var(--radius-card);
+  box-shadow: 0 0 20px 2px var(--card-glow);
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+  pointer-events: none;
+}
+
+.card:focus::before,
+.card:has(> .card-flip:focus-visible)::before {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .card:hover::before {
+    opacity: 1;
+  }
+}
+
+/*
+ * Focus ring (SPEC X5): a pseudo-element, not an outline, so a 2 px navy band always sits
+ * between the frame (and the Alive glow) and the 2 px teal ring. The star and the link keep
+ * the global focus ring; only the card itself uses this one.
+ */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  z-index: 30;
+  border-radius: 24px;
+  border: 2px solid var(--color-teal);
+  box-shadow: inset 0 0 0 2px var(--color-bg);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.card:focus::after,
+.card:has(> .card-flip:focus-visible)::after {
+  opacity: 1;
+}
+
+.card:focus,
+.card-flip:focus-visible {
+  outline: none;
+}
+
+/* Reduced motion: frame effects stay static. */
+@media (prefers-reduced-motion: reduce) {
+  .card[data-status="alive"] .card-face::before {
+    animation: none;
+    opacity: 0.8;
+  }
+
+  .card[data-status="unknown"] .card-face::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  .card::before {
+    transition: none;
+  }
+}

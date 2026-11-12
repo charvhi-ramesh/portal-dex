@@ -39,7 +39,7 @@ export function CardAvatar({
       <div
         role="img"
         aria-label={name}
-        className="flex aspect-square items-center justify-center overflow-hidden bg-surface-raised text-2xl leading-[1.2] font-bold text-text-muted"
+        className="flex aspect-square items-center justify-center overflow-hidden rounded-t-[18px] bg-surface-raised text-2xl leading-[1.2] font-bold text-text-muted"
       >
         {initialOf(name)}
       </div>
@@ -47,7 +47,7 @@ export function CardAvatar({
   }
 
   return (
-    <div className="relative aspect-square overflow-hidden bg-surface-raised">
+    <div className="relative aspect-square overflow-hidden rounded-t-[18px] bg-surface-raised">
       <Image
         ref={imgRef}
         src={src}
