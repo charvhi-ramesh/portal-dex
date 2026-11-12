@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Footer } from "@/components/layout/footer";
+import { StarField } from "@/components/layout/star-field";
+import { Providers } from "./providers";
 import "./globals.css";
 
 const inter = Inter({
@@ -21,13 +24,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <main
-          id="main-content"
-          tabIndex={-1}
-          className="mx-auto w-full max-w-[1280px] flex-1 px-4 focus:outline-none sm:px-6 lg:px-8"
-        >
-          {children}
-        </main>
+        <StarField />
+        <Providers>
+          {/* Plan 01-04 inserts the header here, before main. */}
+          <main
+            id="main-content"
+            tabIndex={-1}
+            className="mx-auto w-full max-w-[1280px] flex-1 px-4 focus:outline-none sm:px-6 lg:px-8"
+          >
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
