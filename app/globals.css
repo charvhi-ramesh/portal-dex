@@ -143,3 +143,61 @@ body {
     animation: none;
   }
 }
+
+/* Skeleton cards: opacity is the only animated property (UI-SPEC Motion Contract). */
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.skeleton-pulse {
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-pulse {
+    animation: none;
+    opacity: 0.75;
+  }
+}
+
+/*
+ * Skeleton counts by breakpoint, shared by the static Suspense fallback and the client
+ * view. The grid list holds 10 items and shows 4 / 6 / 8 / 10 (2 x the 2 / 3 / 4 / 5
+ * columns); the row list holds 5 and shows 2 / 3 / 4 / 5. The base rule hides everything
+ * after the first 4 (2); each breakpoint reveals up to its own count. Same specificity,
+ * so source order decides and the media rules must stay after the base rule.
+ */
+.skeleton-grid > :nth-child(n + 5) {
+  display: none;
+}
+
+.skeleton-row > :nth-child(n + 3) {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .skeleton-grid > :nth-child(-n + 6),
+  .skeleton-row > :nth-child(-n + 3) {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .skeleton-grid > :nth-child(-n + 8),
+  .skeleton-row > :nth-child(-n + 4) {
+    display: block;
+  }
+}
+
+@media (min-width: 1280px) {
+  .skeleton-grid > :nth-child(-n + 10),
+  .skeleton-row > :nth-child(-n + 5) {
+    display: block;
+  }
+}

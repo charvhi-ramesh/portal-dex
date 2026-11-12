@@ -14,6 +14,7 @@ import { LiveRegion, useAnnouncer } from "@/components/browse/live-region";
 import { ResultsToolbar } from "@/components/browse/results-toolbar";
 import { useBrowseUrl } from "@/components/browse/use-browse-url";
 import { useOnlineStatus } from "@/components/browse/use-online-status";
+import { SkeletonGrid } from "@/components/card/card-skeleton";
 import { countAnnouncement } from "@/lib/browse/announce";
 import {
   EMPTY_FILTERS,
@@ -146,7 +147,11 @@ export function BrowseView() {
           />
         </div>
       ) : query.isPending ? (
-        <ul aria-busy="true" className="mt-4 min-h-[60vh]" />
+        // First visit or a filter change: card-sized skeletons until page 1 arrives. The
+        // filter bar, toolbar and live region above stay mounted, so chips never remount.
+        <div aria-busy="true" className="mt-4">
+          <SkeletonGrid variant="grid" />
+        </div>
       ) : characters.length === 0 && !query.hasNextPage ? (
         // BRW-01: zero results render no list at all. A page-1 404 is an empty step
         // (DATA-03), so it always lands here and never in the error branch above.

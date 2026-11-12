@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { BrowseFallback } from "@/components/browse/browse-fallback";
 import { BrowseView } from "@/components/browse/browse-view";
 
 export const metadata: Metadata = { title: "Browse" };
@@ -14,9 +15,7 @@ export default function BrowsePage() {
       >
         Browse characters
       </h1>
-      <Suspense
-        fallback={<div aria-busy="true" className="mt-12 min-h-[60vh]" />}
-      >
+      <Suspense fallback={<BrowseFallback />}>
         <BrowseView />
       </Suspense>
     </section>
