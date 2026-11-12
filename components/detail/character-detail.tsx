@@ -6,6 +6,7 @@ import { useOnlineStatus } from "@/components/browse/use-online-status";
 import { FavouriteStar } from "@/components/card/favourite-star";
 import { DetailHero } from "@/components/detail/detail-hero";
 import { EpisodeStrip } from "@/components/detail/episode-strip";
+import { ResidentsRow } from "@/components/detail/residents-row";
 import { NotFoundContent } from "@/components/layout/not-found-content";
 import { displayName } from "@/lib/card/card-text";
 import { NOT_FOUND_TITLE, detailTitle } from "@/lib/detail/detail";
@@ -107,6 +108,7 @@ export function CharacterDetail({ id }: { id: number }) {
       </div>
       <DetailHero character={data} />
       <EpisodeStrip episodeUrls={data.episode} />
+      <ResidentsRow character={data} />
     </>
   );
 }
