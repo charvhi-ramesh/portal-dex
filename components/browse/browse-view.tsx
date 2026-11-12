@@ -10,6 +10,7 @@ import { CharacterGrid } from "@/components/browse/character-grid";
 import { EmptyPanel } from "@/components/browse/empty-panel";
 import { ErrorPanel } from "@/components/browse/error-panel";
 import { FilterBar } from "@/components/browse/filter-bar";
+import { LoadMore } from "@/components/browse/load-more";
 import { LiveRegion, useAnnouncer } from "@/components/browse/live-region";
 import { ResultsToolbar } from "@/components/browse/results-toolbar";
 import { useBrowseUrl } from "@/components/browse/use-browse-url";
@@ -81,6 +82,14 @@ export function BrowseView() {
     const key = currentKey;
     setRetryKey(key);
     void query.refetch().then(() => setRetryKey((k) => (k === key ? null : k)));
+  }
+
+  // BRW-08: one next load step. Guarded here as well as in LoadMore, so a double press
+  // or an observer report racing a button press never starts a second request.
+  const endNoteRef = useRef<HTMLParagraphElement>(null);
+  function loadMore() {
+    if (!query.hasNextPage || query.isFetchingNextPage) return;
+    void query.fetchNextPage();
   }
 
   useEffect(() => {
@@ -161,6 +170,16 @@ export function BrowseView() {
       ) : (
         <div className="mt-4">
           <CharacterGrid characters={characters} />
+          <LoadMore
+            hasNextPage={query.hasNextPage}
+            isFetchingNextPage={query.isFetchingNextPage}
+            isFetchNextPageError={query.isFetchNextPageError}
+            hasItems={characters.length > 0}
+            pageCount={query.data?.pages.length ?? 0}
+            onLoadMore={loadMore}
+            onRetry={loadMore}
+            endNoteRef={endNoteRef}
+          />
         </div>
       )}
     </>
