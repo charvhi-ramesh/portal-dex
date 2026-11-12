@@ -1,5 +1,8 @@
 import { EMPTY_HEADING } from "@/lib/browse/announce";
 
+/** Id of the Clear filters button, so BrowseView can hand focus to it after a first-page Retry finds nothing. */
+export const CLEAR_FILTERS_ID = "browse-clear-filters";
+
 const EMPTY_BODY =
   "Nothing matches your search and filters. Try a different name, or clear the filters to see everyone.";
 
@@ -25,6 +28,7 @@ export function EmptyPanel({ onClearFilters }: { onClearFilters(): void }) {
       <h2 className="text-2xl leading-[1.2] font-bold text-text">{EMPTY_HEADING}</h2>
       <p className="text-base text-text">{EMPTY_BODY}</p>
       <button
+        id={CLEAR_FILTERS_ID}
         type="button"
         onClick={onClearFilters}
         className="inline-flex min-h-12 items-center justify-center rounded-full bg-blue px-6 text-base font-bold text-bg transition-transform duration-150 hover:bg-blue-hover active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100"

@@ -7,7 +7,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { CharacterGrid } from "@/components/browse/character-grid";
-import { EmptyPanel } from "@/components/browse/empty-panel";
+import { CLEAR_FILTERS_ID, EmptyPanel } from "@/components/browse/empty-panel";
 import { ErrorPanel } from "@/components/browse/error-panel";
 import { FilterBar } from "@/components/browse/filter-bar";
 import {
@@ -20,6 +20,7 @@ import { ResultsToolbar } from "@/components/browse/results-toolbar";
 import { useBrowseUrl } from "@/components/browse/use-browse-url";
 import { useOnlineStatus } from "@/components/browse/use-online-status";
 import { SkeletonGrid } from "@/components/card/card-skeleton";
+import { focusCard } from "@/components/card/focus-card";
 import {
   countAnnouncement,
   moreLoadedAnnouncement,
@@ -84,21 +85,39 @@ export function BrowseView() {
   // settles. A different key never inherits it.
   const online = useOnlineStatus();
   const [retryKey, setRetryKey] = useState<string | null>(null);
+  const gridRef = useRef<HTMLUListElement>(null);
+  const pendingFirstFocus = useRef<string | null>(null);
   const noData = query.data === undefined;
   const retrying = noData && retryKey === currentKey;
   const showError = noData && (query.isError || retrying);
   function retry() {
     if (query.isFetching) return;
     const key = currentKey;
+    pendingFirstFocus.current = key;
     setRetryKey(key);
     void query.refetch().then(() => setRetryKey((k) => (k === key ? null : k)));
   }
+
+  // WR-02: when the retry succeeds the error panel, and the Retry button that had focus,
+  // unmounts. Hand focus to the first card (its flip button, named by the card label), or
+  // to Clear filters when nothing matches. The request is tied to the key it was made for,
+  // so a filter change in the meantime never receives it; a retry that fails again keeps
+  // the panel, and the button, in place, so the request simply waits.
+  const hasData = query.data !== undefined;
+  useEffect(() => {
+    const key = pendingFirstFocus.current;
+    if (key === null || showError || !hasData) return;
+    pendingFirstFocus.current = null;
+    if (key !== currentKey) return;
+    if (!focusCard(gridRef.current?.children[0])) {
+      document.getElementById(CLEAR_FILTERS_ID)?.focus();
+    }
+  }, [currentKey, showError, hasData]);
 
   // BRW-08: one next load step. Guarded here as well as in LoadMore, so a double press
   // or an observer report racing a button press never starts a second request. Only a
   // button press (Load more or the inline Retry) asks for focus to follow the new cards;
   // scroll-triggered loads never move focus (planning decision 3).
-  const gridRef = useRef<HTMLUListElement>(null);
   const endNoteRef = useRef<HTMLParagraphElement>(null);
   const pendingFocusIndex = useRef<number | null>(null);
   const characterCount = characters.length;
