@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   useInfiniteQuery,
   useQuery,
@@ -8,10 +8,13 @@ import {
 } from "@tanstack/react-query";
 import { CharacterGrid } from "@/components/browse/character-grid";
 import { FilterBar } from "@/components/browse/filter-bar";
+import { LiveRegion, useAnnouncer } from "@/components/browse/live-region";
 import { ResultsToolbar } from "@/components/browse/results-toolbar";
 import { useBrowseUrl } from "@/components/browse/use-browse-url";
+import { countAnnouncement } from "@/lib/browse/announce";
 import {
   EMPTY_FILTERS,
+  filtersKey,
   hasActiveFilters,
   type Filters,
 } from "@/lib/browse/filters";
@@ -50,6 +53,22 @@ export function BrowseView() {
           humanoidCount: isHuman ? (humanoid.data ?? null) : null,
         });
 
+  // BRW-07: announce the settled count once per filter set. Nothing is written while the
+  // total is null ("Counting..."), so an interim or Humanoid-inflated value is never
+  // heard (D-08). The last announced key lives in a ref, so a re-show of this view (Back,
+  // Activity) with the same filters does not repeat the announcement. The visible count
+  // line is not itself live.
+  const { regionRef, announce } = useAnnouncer();
+  const lastAnnouncedKey = useRef<string | null>(null);
+  const currentKey = filtersKey(filters);
+  const isPending = query.isPending;
+  useEffect(() => {
+    if (total === null || isPending) return;
+    if (lastAnnouncedKey.current === currentKey) return;
+    lastAnnouncedKey.current = currentKey;
+    announce(countAnnouncement(total));
+  }, [currentKey, total, isPending, announce]);
+
   // Only user-initiated changes come through here; Back and Forward (popstate) bypass it,
   // so they keep every loaded page (BRW-11) and never move the scroll position.
   // BRW-06: typing replaces the history entry, chips and Clear all push one.
@@ -78,6 +97,7 @@ export function BrowseView() {
 
   return (
     <>
+      <LiveRegion regionRef={regionRef} />
       <div className="mt-12">
         <FilterBar filters={filters} onChange={applyFilters} />
       </div>
