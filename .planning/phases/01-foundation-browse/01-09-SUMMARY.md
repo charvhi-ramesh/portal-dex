@@ -209,3 +209,7 @@ None - no external service configuration required.
 ---
 *Phase: 01-foundation-browse*
 *Completed: 2026-11-12*
+
+## Self-Check: PASSED
+
+Found: all 5 created files on disk; commits cc0ea60, 8dc4198 and d76f2e4 are ancestors of HEAD; all acceptance_criteria greps pass; slow gate SMOKE OK.

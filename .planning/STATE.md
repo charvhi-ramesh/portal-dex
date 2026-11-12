@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 1
 current_phase_name: Foundation + Browse
 status: executing
-stopped_at: Completed 01-08-PLAN.md
-last_updated: "2026-11-12T03:05:10.885Z"
+stopped_at: Completed 01-09-PLAN.md
+last_updated: "2026-11-12T03:20:52.883Z"
 last_activity: 2026-11-12
 last_activity_desc: Phase 1 execution started
-state_head: 2573ffd914413c1cdc9373f46605eaceb6b65345
+state_head: ac26c3d3b6e0e9dcde03eb04a9e290549d35dc1d
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 10
-  completed_plans: 8
+  completed_plans: 9
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-11)
 ## Current Position
 
 Phase: 1 (Foundation + Browse) — EXECUTING
-Plan: 9 of 10
+Plan: 10 of 10
 Status: Ready to execute
 Last activity: 2026-11-12 — Phase 1 execution started
 
@@ -64,6 +64,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P05 | n/a (resumed) | 3 tasks | 7 files |
 | Phase 01 P07 | 7 min | 2 tasks | 5 files |
 | Phase 01 P08 | 8 min | 2 tasks | 4 files |
+| Phase 01 P09 | 15 min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -91,6 +92,8 @@ Recent decisions affecting current work:
 - [Phase 01]: 01-07: Clear via x/Escape uses history replace (search edit); Clear all and chips push; scroll to toolbar only when top < 64 px
 - [Phase 01]: 01-08: a failed Humanoid count request leaves the Human total null (Counting... shown, nothing announced) rather than showing a Humanoid-inflated number
 - [Phase 01]: 01-08: the humanoid count query is enabled only for the Human chip with firstCount > 0; live-region announce() is a stable callback written through a ref after a 500 ms settle
+- [Phase 01]: 01-09: Retry keeps the error panel mounted via a retryKey because a data-less TanStack query resets to pending on refetch
+- [Phase 01]: 01-09: Skeleton badge and species bars use the real card's CSS heights (24.8 px, 20 px), not the plan's 29 px and 21 px
 
 ### Pending Todos
 
@@ -114,6 +117,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-12T03:05:10.774Z
-Stopped at: Completed 01-08-PLAN.md
+Last session: 2026-11-12T03:20:52.761Z
+Stopped at: Completed 01-09-PLAN.md
 Resume file: None

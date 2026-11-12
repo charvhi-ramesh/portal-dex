@@ -29,7 +29,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Browse
 
-- [ ] **BRW-01**: User can see characters in a responsive grid (2 columns under 640 px, 3 from 640–1024 px, 4–5 above)
+- [x] **BRW-01**: User can see characters in a responsive grid (2 columns under 640 px, 3 from 640–1024 px, 4–5 above)
 - [x] **BRW-02**: User can search by name with a 300 ms debounce, and clear it with a × button or Escape
 - [x] **BRW-03**: User can filter by status, gender and species chips (one value per group), and deselect an active chip by clicking it
 - [x] **BRW-04**: Species chips (Human, Alien, Humanoid, Mythological Creature, Robot, Animal) match exactly, so Human excludes Humanoid, and the displayed total is derived correctly
@@ -138,7 +138,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-03 | Phase 1 | Pending |
 | DATA-04 | Phase 3 | Pending |
 | DATA-05 | Phase 1 | Complete |
-| BRW-01 | Phase 1 | Pending |
+| BRW-01 | Phase 1 | Complete |
 | BRW-02 | Phase 1 | Complete |
 | BRW-03 | Phase 1 | Complete |
 | BRW-04 | Phase 1 | Complete |
