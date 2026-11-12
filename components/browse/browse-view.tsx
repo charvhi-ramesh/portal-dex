@@ -1,6 +1,7 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { CharacterGrid } from "@/components/browse/character-grid";
 import { FilterGroup } from "@/components/browse/filter-group";
 import { useBrowseUrl } from "@/components/browse/use-browse-url";
 import { STATUSES, toListParams, toggleFilter } from "@/lib/browse/filters";
@@ -31,11 +32,9 @@ export function BrowseView() {
           {"Couldn't load characters."}
         </p>
       ) : (
-        <ul className="mt-12">
-          {characters.map((character) => (
-            <li key={character.id}>{character.name}</li>
-          ))}
-        </ul>
+        <div className="mt-4">
+          <CharacterGrid characters={characters} />
+        </div>
       )}
     </>
   );
