@@ -25,3 +25,14 @@ export function routeCharacterId(raw: string | undefined): number | null {
 
 export const NOT_FOUND_HEADING = "Page not found";
 export const NOT_FOUND_TITLE = pageTitle(NOT_FOUND_HEADING);
+
+/** The transition type View details links carry; only navigations tagged with it morph the card. */
+export const CARD_DETAIL_TRANSITION = "card-detail";
+
+/**
+ * The view-transition name shared by a card and the detail hero of the same character. Built from
+ * the numeric ID only, so API text never becomes a CSS identifier (T-03-10).
+ */
+export function cardTransitionName(id: number): string {
+  return `character-${id}`;
+}

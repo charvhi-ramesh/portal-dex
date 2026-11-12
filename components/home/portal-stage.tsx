@@ -10,6 +10,7 @@ import { CharacterCard } from "@/components/card/character-card";
 import { TiltFrame } from "@/components/card/tilt-frame";
 import { PortalDisc } from "@/components/home/portal-disc";
 import { useMediaQuery } from "@/components/layout/use-media-query";
+import { CARD_DETAIL_TRANSITION } from "@/lib/detail/detail";
 import {
   INITIAL_PORTAL_STATE,
   SPIN_MS,
@@ -211,6 +212,7 @@ export function PortalStage() {
             <Link
               href={`/character/${character.id}`}
               prefetch={false}
+              transitionTypes={[CARD_DETAIL_TRANSITION]}
               aria-label={`View details for ${character.name.trim()}`}
               className={SECONDARY_BUTTON}
             >

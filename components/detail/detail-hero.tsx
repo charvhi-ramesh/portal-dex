@@ -1,7 +1,9 @@
+import { ViewTransition } from "react";
 import { CardAvatar } from "@/components/card/card-avatar";
 import type { Character } from "@/lib/api/types";
 import { labelFor } from "@/lib/browse/filters";
 import { backFacts } from "@/lib/card/card-text";
+import { CARD_DETAIL_TRANSITION, cardTransitionName } from "@/lib/detail/detail";
 
 // Literal class strings so Tailwind generates them. Dead is desaturated like the card photo.
 function frameClass(status: Character["status"]): string {
@@ -22,17 +24,24 @@ function badgeClass(status: Character["status"]): string {
 export function DetailHero({ character }: { character: Character }) {
   return (
     <div className="mt-6 grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-8">
-      <div
-        className={`overflow-hidden rounded-[20px] border-2 ${frameClass(character.status)}`}
+      <ViewTransition
+        name={cardTransitionName(character.id)}
+        share={{ [CARD_DETAIL_TRANSITION]: "card-morph", default: "none" }}
+        enter="detail-fade"
+        default="none"
       >
-        <CardAvatar
-          src={character.image}
-          name={character.name}
-          eager
-          sizes="(min-width: 768px) 40vw, 100vw"
-          rounded="all"
-        />
-      </div>
+        <div
+          className={`overflow-hidden rounded-[20px] border-2 ${frameClass(character.status)}`}
+        >
+          <CardAvatar
+            src={character.image}
+            name={character.name}
+            eager
+            sizes="(min-width: 768px) 40vw, 100vw"
+            rounded="all"
+          />
+        </div>
+      </ViewTransition>
       <div className="flex flex-col gap-4">
         <span
           className={`inline-flex w-fit items-center rounded-full px-2 py-1 text-sm leading-[1.2] font-bold text-bg ${badgeClass(character.status)}`}
