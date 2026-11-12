@@ -64,9 +64,9 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Character Detail
 
 - [x] **DET-01**: User can see a hero with large avatar, name, status, species, type, gender, origin, last location and a favourite button, with unknown origin/location as plain text
-- [ ] **DET-02**: Avatar morphs from the card into the hero via View Transitions, with a fade fallback if it is not clean within ~30 minutes and under reduced motion
-- [ ] **DET-03**: User sees a horizontally scrollable episode strip ("S01E01 · Pilot"), sorted by ID, with a chip count equal to `character.episode.length`
-- [ ] **DET-04**: User sees an "Also found at {location}" row of up to 12 other residents (deterministic, via one multi-ID request) linking to their pages, hidden if the location is unknown or there are no other residents
+- [x] **DET-02**: Avatar morphs from the card into the hero via View Transitions, with a fade fallback if it is not clean within ~30 minutes and under reduced motion
+- [x] **DET-03**: User sees a horizontally scrollable episode strip ("S01E01 · Pilot"), sorted by ID, with a chip count equal to `character.episode.length`
+- [x] **DET-04**: User sees an "Also found at {location}" row of up to 12 other residents (deterministic, via one multi-ID request) linking to their pages, hidden if the location is unknown or there are no other residents
 - [x] **DET-05**: Page title is "{name} · Portal Dex"
 - [x] **DET-06**: User sees the custom portal-themed 404 for invalid or non-existent character IDs and unknown routes
 
@@ -164,9 +164,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | HOME-05 | Phase 2 | Complete |
 | HOME-06 | Phase 2 | Complete |
 | DET-01 | Phase 3 | Complete |
-| DET-02 | Phase 3 | Pending |
-| DET-03 | Phase 3 | Pending |
-| DET-04 | Phase 3 | Pending |
+| DET-02 | Phase 3 | Complete |
+| DET-03 | Phase 3 | Complete |
+| DET-04 | Phase 3 | Complete |
 | DET-05 | Phase 3 | Complete |
 | DET-06 | Phase 3 | Complete |
 | COL-01 | Phase 2 | Complete |
