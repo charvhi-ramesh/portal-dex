@@ -175,9 +175,11 @@ None. No new endpoints, auth paths or schema. T-02-01 (API strings as React text
 - `CharacterCard` props are unchanged (`{ character, eager }`), so plan 02-02 can render it as is.
 - The `/character/[id]` route does not exist until Phase 3; the View details link is correct but leads to a 404 for now.
 
-## Self-Check
+## Self-Check: PASSED
 
-Files, commits and acceptance criteria verified after writing (see below).
+- Created and modified files all present on disk (card-text.ts, card-text.test.ts, card-back.tsx, character-card.tsx, card-avatar.tsx, check-contrast.ts, this SUMMARY)
+- Commits `bd1c9c8`, `e7c3c05`, `1f282cc`, `2ee1d15` are ancestors of HEAD
+- Working tree clean; all task acceptance criteria and the slow gate passed (see Verification Results)
 
 ---
 *Phase: 02-card-effects-portal*
