@@ -55,7 +55,10 @@ export function BrowseView() {
   });
   // null means "Counting...": no data for this key yet, or the Human total is not
   // final. The raw firstCount is never shown for Human (D-08). If the count request
-  // fails, the total stays null rather than showing a Humanoid-inflated number.
+  // fails, the total stays null rather than showing a Humanoid-inflated number, and
+  // `countFailed` swaps "Counting..." for an empty count slot so it never spins forever.
+  // Nothing is announced either: the live region only ever receives a final total.
+  const countFailed = isHuman && humanoid.isError;
   const total =
     firstCount === undefined
       ? null
@@ -213,7 +216,7 @@ export function BrowseView() {
         <ResultsToolbar
           ref={toolbarRef}
           count={total}
-          unavailable={showError}
+          unavailable={showError || countFailed}
           showClearAll={hasActiveFilters(filters)}
           onClearAll={() => applyFilters(EMPTY_FILTERS, "push")}
         />

@@ -15,7 +15,11 @@ export function ResultsToolbar({
   count: number | null;
   showClearAll: boolean;
   onClearAll(): void;
-  /** The first page failed: show an empty count slot instead of a "Counting..." that never ends. */
+  /**
+   * The count can never arrive (the first page failed, or the Human total's Humanoid
+   * count request failed): show an empty count slot instead of a "Counting..." that
+   * never ends, and never a Humanoid-inflated number.
+   */
   unavailable?: boolean;
   ref?: Ref<HTMLDivElement>;
 }) {
