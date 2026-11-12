@@ -1,7 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { CharacterGrid } from "@/components/browse/character-grid";
 import { FilterBar } from "@/components/browse/filter-bar";
 import { ResultsToolbar } from "@/components/browse/results-toolbar";
@@ -9,10 +13,11 @@ import { useBrowseUrl } from "@/components/browse/use-browse-url";
 import {
   EMPTY_FILTERS,
   hasActiveFilters,
-  toListParams,
   type Filters,
 } from "@/lib/browse/filters";
-import { browseOptions } from "@/lib/query/options";
+import { deriveTotal } from "@/lib/browse/species";
+import { flattenSteps } from "@/lib/browse/steps";
+import { browseOptions, humanoidCountOptions } from "@/lib/query/options";
 
 // The sticky header is 64 px tall (UI-SPEC); the toolbar is scrolled to only when its top
 // has gone above it.
@@ -23,12 +28,27 @@ export function BrowseView() {
   const { filters, pushFilters, replaceFilters } = useBrowseUrl();
   const queryClient = useQueryClient();
   const toolbarRef = useRef<HTMLDivElement>(null);
-  const query = useInfiniteQuery(browseOptions(toListParams(filters)));
-  const characters =
-    query.data?.pages.flatMap((page) => page?.results ?? []) ?? [];
-  // Plan 01-08 replaces this with the derived total.
-  const count =
-    query.data === undefined ? null : (query.data.pages[0]?.info.count ?? 0);
+  const query = useInfiniteQuery(browseOptions(filters));
+  const characters = flattenSteps(query.data?.pages ?? []);
+  const firstCount = query.data?.pages[0]?.count;
+  // D-08: the Human chip's API count includes Humanoid, so its total needs one extra
+  // count-only request, made only once page 1 has settled with at least one match.
+  const isHuman = filters.species === "Human";
+  const humanoid = useQuery({
+    ...humanoidCountOptions(filters),
+    enabled: isHuman && firstCount !== undefined && firstCount > 0,
+  });
+  // null means "Counting...": no data for this key yet, or the Human total is not
+  // final. The raw firstCount is never shown for Human (D-08). If the count request
+  // fails, the total stays null rather than showing a Humanoid-inflated number.
+  const total =
+    firstCount === undefined
+      ? null
+      : deriveTotal({
+          species: filters.species,
+          firstCount,
+          humanoidCount: isHuman ? (humanoid.data ?? null) : null,
+        });
 
   // Only user-initiated changes come through here; Back and Forward (popstate) bypass it,
   // so they keep every loaded page (BRW-11) and never move the scroll position.
@@ -37,7 +57,7 @@ export function BrowseView() {
     // BRW-10: a user change starts from the first page, so trim any cached pages for the
     // target filter set before the URL (and so the query key) changes.
     queryClient.setQueryData(
-      browseOptions(toListParams(next)).queryKey,
+      browseOptions(next).queryKey,
       (data) =>
         data && data.pages.length > 1
           ? {
@@ -64,7 +84,7 @@ export function BrowseView() {
       <div className="mt-8">
         <ResultsToolbar
           ref={toolbarRef}
-          count={count}
+          count={total}
           showClearAll={hasActiveFilters(filters)}
           onClearAll={() => applyFilters(EMPTY_FILTERS, "push")}
         />
