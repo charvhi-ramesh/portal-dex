@@ -75,9 +75,9 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **COL-01**: Favourites persist in `localStorage` (`portal-dex:favourites`), read only after mount
 - [x] **COL-02**: Favourites storage tolerates unavailable storage, corrupt JSON and non-integer entries, and syncs across tabs
 - [x] **COL-03**: Header counter updates immediately when a favourite is toggled anywhere
-- [ ] **COL-04**: User can see all favourites in the card grid via one multi-ID request
-- [ ] **COL-05**: User can remove a favourite from the collection with an exit animation, focus moves sensibly and the removal is announced
-- [ ] **COL-06**: User sees an empty collection state with links to Browse and the portal
+- [x] **COL-04**: User can see all favourites in the card grid via one multi-ID request
+- [x] **COL-05**: User can remove a favourite from the collection with an exit animation, focus moves sensibly and the removal is announced
+- [x] **COL-06**: User sees an empty collection state with links to Browse and the portal
 
 ### Accessibility
 
@@ -172,9 +172,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | COL-01 | Phase 2 | Complete |
 | COL-02 | Phase 2 | Complete |
 | COL-03 | Phase 2 | Complete |
-| COL-04 | Phase 3 | Pending |
-| COL-05 | Phase 3 | Pending |
-| COL-06 | Phase 3 | Pending |
+| COL-04 | Phase 3 | Complete |
+| COL-05 | Phase 3 | Complete |
+| COL-06 | Phase 3 | Complete |
 | A11Y-01 | Phase 3 | Pending |
 | A11Y-02 | Phase 3 | Pending |
 | A11Y-03 | Phase 3 | Pending |

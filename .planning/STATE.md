@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 3
 current_phase_name: Detail + Collection
 status: executing
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-11-12T10:18:29.839Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-11-12T10:33:20.697Z"
 last_activity: 2026-11-12
 last_activity_desc: Phase 3 execution started
-state_head: 74edc1bd461cb659aed3c0502f1ef76b65147e3a
+state_head: 89617ea4bcf83627b0c0e5f206532f3d4ea87c70
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 19
-  completed_plans: 15
+  completed_plans: 16
   percent: 25
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-11)
 ## Current Position
 
 Phase: 3 (Detail + Collection) — EXECUTING
-Plan: 2 of 5
+Plan: 3 of 5
 Status: Ready to execute
 Last activity: 2026-11-12 — Phase 3 execution started
 
@@ -70,6 +70,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 02 P03 | 20 min | 2 tasks | 7 files |
 | Phase 02 P04 | 12 min | 2 tasks | 5 files |
 | Phase 03 P01 | 40 min | 3 tasks | 11 files |
+| Phase 03 P02 | 15 min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -109,6 +110,8 @@ Recent decisions affecting current work:
 - [Phase 02]: 02-04: sheen position follows the pointer directly; only sheen opacity and rotation are springs (stiffness 300, damping 30) — Spot tracks the cursor without lag; Phase 4 may tune spring values
 - [Phase 03]: 03-01: generateStaticParams returns one sample so params is read at top level; build accepted it, no Suspense fallback
 - [Phase 03]: 03-01: invalid IDs return HTTP 200 on first request (PPR shell) and 404 on repeat; plan's documented 200+noindex fallback accepted, first-hit 404 left as an open user decision
+- [Phase 03]: 03-02: Collection removal side effects run in AnimatePresence onExitComplete; focus and scroll move only when the removed card held focus (hadFocus recorded in a capture-phase click before the card turns inert)
+- [Phase 03]: 03-02: Collection query key is the sorted ID list with keepPreviousData; placeholder data holding no current favourite counts as loading, not empty
 
 ### Pending Todos
 
@@ -132,6 +135,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-12T10:18:28.364Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-11-12T10:33:18.872Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
