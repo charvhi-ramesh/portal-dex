@@ -12,11 +12,11 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Foundation & Layout
 
 - [x] **FND-01**: Dark cosmic theme tokens (colours, Inter font, radii, shadows) are available app-wide, and every text/background pair passes 4.5:1 contrast (UI borders and focus indicators 3:1)
-- [ ] **FND-02**: User sees a sticky header with the "Portal Dex" wordmark, Browse and Collection links, and a collected counter that shows "N collected" until the total is known
+- [x] **FND-02**: User sees a sticky header with the "Portal Dex" wordmark, Browse and Collection links, and a collected counter that shows "N collected" until the total is known
 - [x] **FND-03**: User sees a footer with a link to the Rick and Morty API and the unofficial-fan-project disclaimer
-- [ ] **FND-04**: On mobile, user can open and close a hamburger menu that closes on Escape, outside tap and route change, traps focus while open and returns focus to the button
+- [x] **FND-04**: On mobile, user can open and close a hamburger menu that closes on Escape, outside tap and route change, traps focus while open and returns focus to the button
 - [x] **FND-05**: Keyboard user can use a "Skip to content" link, and focused elements are never hidden behind the sticky header
-- [ ] **FND-06**: After client-side navigation, focus moves to the page `h1` and the document title updates
+- [x] **FND-06**: After client-side navigation, focus moves to the page `h1` and the document title updates
 - [x] **FND-07**: Star-field background drifts slowly, and is static under reduced motion
 
 ### API & Data
@@ -127,11 +127,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | FND-01 | Phase 1 | Complete |
-| FND-02 | Phase 1 | Pending |
+| FND-02 | Phase 1 | Complete |
 | FND-03 | Phase 1 | Complete |
-| FND-04 | Phase 1 | Pending |
+| FND-04 | Phase 1 | Complete |
 | FND-05 | Phase 1 | Complete |
-| FND-06 | Phase 1 | Pending |
+| FND-06 | Phase 1 | Complete |
 | FND-07 | Phase 1 | Complete |
 | DATA-01 | Phase 1 | Complete |
 | DATA-02 | Phase 1 | Complete |
