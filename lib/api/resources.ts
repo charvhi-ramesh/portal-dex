@@ -1,21 +1,39 @@
-// RED-phase stub: signatures only, no behaviour yet.
+import { getJson } from "./client.ts";
+import { toArray, toIdList } from "./normalize.ts";
 import type { Episode, LocationResource } from "./types.ts";
 
+/** One request for many episodes. Missing IDs are omitted; 404 gives []. */
 export async function fetchEpisodesByIds(
-  _ids: readonly number[],
-  _signal?: AbortSignal,
+  ids: readonly number[],
+  signal?: AbortSignal,
 ): Promise<Episode[]> {
-  return [];
+  const list = toIdList(ids);
+  if (list.length === 0) return [];
+  const result = await getJson<Episode | Episode[]>(
+    `/episode/${list.join(",")}`,
+    signal,
+  );
+  return toArray(result);
 }
+
 export async function fetchLocation(
-  _id: number,
-  _signal?: AbortSignal,
+  id: number,
+  signal?: AbortSignal,
 ): Promise<LocationResource | null> {
-  return null;
+  if (!Number.isSafeInteger(id) || id < 1) return null;
+  return getJson<LocationResource>(`/location/${id}`, signal);
 }
+
+/** One request for many locations. Missing IDs are omitted; 404 gives []. */
 export async function fetchLocationsByIds(
-  _ids: readonly number[],
-  _signal?: AbortSignal,
+  ids: readonly number[],
+  signal?: AbortSignal,
 ): Promise<LocationResource[]> {
-  return [];
+  const list = toIdList(ids);
+  if (list.length === 0) return [];
+  const result = await getJson<LocationResource | LocationResource[]>(
+    `/location/${list.join(",")}`,
+    signal,
+  );
+  return toArray(result);
 }

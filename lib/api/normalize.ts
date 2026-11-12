@@ -1,13 +1,26 @@
-// RED-phase stub: signatures only, no behaviour yet.
-export function parseId(_raw: string): number | null {
-  return null;
+// ID parsing and response normalisation. React-free so `node --test` can run it.
+
+/** Accepts only canonical positive integer strings ("1", "826"); never "0", "007", "1.5", " 1". */
+export function parseId(raw: string): number | null {
+  if (!/^[1-9]\d*$/.test(raw)) return null;
+  const n = Number(raw);
+  return Number.isSafeInteger(n) ? n : null;
 }
-export function extractId(_url: string): number | null {
-  return null;
+
+/** Reads the id from the last non-empty path segment of a resource URL. Empty URLs give null. */
+export function extractId(url: string): number | null {
+  const last = url.split("/").filter(Boolean).pop() ?? "";
+  return parseId(last);
 }
-export function toIdList(_ids: readonly number[]): number[] {
-  return [];
+
+/** Positive safe integers only, deduped and sorted ascending, so multi-ID paths are deterministic. */
+export function toIdList(ids: readonly number[]): number[] {
+  const valid = ids.filter((n) => Number.isSafeInteger(n) && n > 0);
+  return [...new Set(valid)].sort((a, b) => a - b);
 }
-export function toArray<T>(_value: T | T[] | null | undefined): T[] {
-  return [];
+
+/** The API returns an object for one ID and an array for several; normalise to an array. */
+export function toArray<T>(value: T | T[] | null | undefined): T[] {
+  if (value === null || value === undefined) return [];
+  return Array.isArray(value) ? value : [value];
 }
