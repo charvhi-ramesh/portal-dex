@@ -44,8 +44,8 @@ export function MenuButtonFallback() {
   );
 }
 
-// FND-04: hamburger plus a modal dialog. Closes on Escape, outside tap, route change and
-// viewport >= 640 px; traps Tab; keeps the page behind inert while open (T-01-10).
+// FND-04: hamburger plus a modal dialog. Closes on Escape, outside tap, link activation,
+// route change and viewport >= 640 px; traps Tab; keeps the page behind inert while open (T-01-10).
 export function MobileMenu() {
   const pathname = usePathname();
   const isDesktop = useMediaQuery("(min-width: 640px)");
@@ -102,11 +102,23 @@ export function MobileMenu() {
       closeAndRestoreFocus();
     };
 
+    // Activating any link closes the menu. A route change alone is not enough: a link to
+    // the current route (for example /browse?q=x to /browse) leaves the pathname
+    // unchanged, so the menu would stay open and the page behind it inert. Focus goes to
+    // the hamburger; on a real route change RouteFocus then moves it to the new h1.
+    const onPanelClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element) || !target.closest("a[href]")) return;
+      closeAndRestoreFocus();
+    };
+
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("pointerdown", onPointerDown);
+    panel.addEventListener("click", onPanelClick);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
+      panel.removeEventListener("click", onPanelClick);
       for (const el of inertTargets) el.removeAttribute("inert");
     };
   }, [open]);
