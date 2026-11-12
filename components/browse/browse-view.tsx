@@ -170,15 +170,21 @@ export function BrowseView() {
   function applyFilters(next: Filters, mode: "push" | "replace") {
     // BRW-10: a user change starts from the first page, so trim any cached pages for the
     // target filter set before the URL (and so the query key) changes.
+    // Returning `undefined` makes setQueryData a no-op, so an untrimmed key keeps its
+    // original `dataUpdatedAt`. A trim re-writes the data, so it passes the existing
+    // timestamp: otherwise the write would restart the 1-hour staleTime clock and show
+    // an old cache as fresh (DATA-05).
+    const targetKey = browseOptions(next).queryKey;
     queryClient.setQueryData(
-      browseOptions(next).queryKey,
+      targetKey,
       (data) =>
         data && data.pages.length > 1
           ? {
               pages: data.pages.slice(0, 1),
               pageParams: data.pageParams.slice(0, 1),
             }
-          : data,
+          : undefined,
+      { updatedAt: queryClient.getQueryState(targetKey)?.dataUpdatedAt },
     );
     if (mode === "replace") replaceFilters(next);
     else pushFilters(next);
