@@ -40,10 +40,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can type "rick" and see only matching names after a 300 ms debounce, combine it with status, gender and species chips (one value per group, click an active chip to deselect), clear the search with the × button or Escape, and reset everything with "Clear all". Refresh and shared links keep the search and filters; browser Back keeps the loaded pages and scroll position. The Human chip never shows a Humanoid and its total equals the number of exact-Human results. A superseded search never overwrites newer results, and revisiting a recent query does not refetch.
   4. User can scroll to the bottom, or press "Load more", to load the next page with no duplicate cards. "N characters" and "20 more characters loaded" are announced politely, changing search or filters returns to page 1 at the top of the grid, and reaching the last page (a 404 on page > 1) ends loading with no error and no empty state.
   5. User sees skeleton cards while loading, the "No characters in this dimension" empty state with a clear-filters button when nothing matches (never the error state), and an error state with Retry, including "You appear to be offline" wording. A failed next-page load keeps the existing cards and shows an inline retry.
-**Plans:** 10 plans (7 waves)
+**Plans:** 1/10 plans executed (7 waves)
 
 Plans:
-- [ ] 01-01-PLAN.md — Test harness and typed API client (live read), ends with the TanStack Query legitimacy checkpoint (wave 1)
+- [x] 01-01-PLAN.md — Test harness and typed API client (live read), ends with the TanStack Query legitimacy checkpoint (wave 1)
 - [ ] 01-02-PLAN.md — Dark cosmic shell: tokens and contrast gate, Inter, skip link, footer, star field, interim / and /collection, smoke runner (wave 1)
 - [ ] 01-03-PLAN.md — Walking skeleton: /browse reads real characters via TanStack Query; Status chip writes the URL (wave 2)
 - [ ] 01-04-PLAN.md — Sticky header, nav and counter, focus-to-h1 on navigation, accessible mobile menu (wave 2)
@@ -102,7 +102,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Browse | 0/10 | Planned | - |
+| 1. Foundation + Browse | 1/10 | In Progress | - |
 | 2. Card effects + Portal | 0/TBD | Not started | - |
 | 3. Detail + Collection | 0/TBD | Not started | - |
 | 4. Light polish | 0/TBD | Not started | - |

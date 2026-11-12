@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 current_phase: 1
 current_phase_name: Foundation + Browse
-status: planning
-stopped_at: Phase 1 context gathered
-last_updated: "2026-11-11T06:29:53.860Z"
-last_activity: 2026-11-11
-last_activity_desc: Roadmap created (4 phases, 59/59 v1 requirements mapped)
-state_head: ed41e5b431381d4419a69c68b0833047680138d7
+status: executing
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-11-12T00:44:19.141Z"
+last_activity: 2026-11-12
+last_activity_desc: Phase 1 execution started
+state_head: 3c6b1e949adaed9cbfa9b5114c3fb4b4ab824120
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 10
+  completed_plans: 1
   percent: 0
 ---
 
@@ -23,14 +23,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-11-11)
 
 **Core value:** Browsing and collecting characters must feel delightful: cards that tilt, flip and glow, and a portal that reveals a random character, in a dark cosmic UI that stays fast and fully accessible (WCAG 2.1 AA).
-**Current focus:** Phase 1 - Foundation + Browse
+**Current focus:** Phase 1 — Foundation + Browse
 
 ## Current Position
 
-Phase: 1 of 4 (Foundation + Browse)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-11-11 — Roadmap created (4 phases, 59/59 v1 requirements mapped)
+Phase: 1 (Foundation + Browse) — EXECUTING
+Plan: 2 of 10
+Status: Ready to execute
+Last activity: 2026-11-12 — Phase 1 execution started
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -52,6 +52,11 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: -
 
 *Updated after each plan completion*
+**Per-Plan Metrics:**
+
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| Phase 01 P01 | 20 min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -64,6 +69,9 @@ Recent decisions affecting current work:
 - [Roadmap]: COL-01 to COL-03 (favourites store, counter) ship in Phase 2 with the favourite star; Collection page stays in Phase 3
 - [Roadmap]: DATA-04 (invalid route IDs show 404) is verified in Phase 3 when the route and 404 page exist
 - [Roadmap]: All phases run in MVP mode (`**Mode:** mvp`), planned as vertical slices
+- [Phase 01]: node --test only for lib unit tests; no test library added (CLAUDE.md dependency rule)
+- [Phase 01]: verbatimModuleSyntax + allowImportingTsExtensions + erasableSyntaxOnly enabled so Node type stripping and tsc agree on type-only imports
+- [Phase 01]: @tanstack/react-query approved by user at exactly 5.107.1; install in plan 01-03 with npm install --save-exact; no other package approved
 
 ### Pending Todos
 
@@ -87,6 +95,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-11T06:29:53.813Z
-Stopped at: Phase 1 context gathered
-Resume file: .planning/phases/01-foundation-browse/01-CONTEXT.md
+Last session: 2026-11-12T00:44:19.014Z
+Stopped at: Completed 01-01-PLAN.md
+Resume file: None

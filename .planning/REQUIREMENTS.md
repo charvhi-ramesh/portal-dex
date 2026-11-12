@@ -21,8 +21,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### API & Data
 
-- [ ] **DATA-01**: Typed API client fetches character lists (with filters and pages), single characters, multi-ID characters, multi-ID episodes and locations
-- [ ] **DATA-02**: Multi-ID responses are always normalised to arrays and tolerate missing IDs
+- [x] **DATA-01**: Typed API client fetches character lists (with filters and pages), single characters, multi-ID characters, multi-ID episodes and locations
+- [x] **DATA-02**: Multi-ID responses are always normalised to arrays and tolerate missing IDs
 - [ ] **DATA-03**: A 404 on page 1 of a filtered query is "no results", and a 404 on page > 1 means "no more pages"
 - [ ] **DATA-04**: Route IDs are validated as positive integers before any fetch, and invalid IDs show the 404 page without calling the API
 - [ ] **DATA-05**: TanStack Query uses `staleTime` of at least 1 hour and no refetch on window focus, with stale requests cancelled via `AbortSignal`
@@ -133,8 +133,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FND-05 | Phase 1 | Pending |
 | FND-06 | Phase 1 | Pending |
 | FND-07 | Phase 1 | Pending |
-| DATA-01 | Phase 1 | Pending |
-| DATA-02 | Phase 1 | Pending |
+| DATA-01 | Phase 1 | Complete |
+| DATA-02 | Phase 1 | Complete |
 | DATA-03 | Phase 1 | Pending |
 | DATA-04 | Phase 3 | Pending |
 | DATA-05 | Phase 1 | Pending |
