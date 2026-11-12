@@ -25,16 +25,16 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **DATA-02**: Multi-ID responses are always normalised to arrays and tolerate missing IDs
 - [ ] **DATA-03**: A 404 on page 1 of a filtered query is "no results", and a 404 on page > 1 means "no more pages"
 - [ ] **DATA-04**: Route IDs are validated as positive integers before any fetch, and invalid IDs show the 404 page without calling the API
-- [ ] **DATA-05**: TanStack Query uses `staleTime` of at least 1 hour and no refetch on window focus, with stale requests cancelled via `AbortSignal`
+- [x] **DATA-05**: TanStack Query uses `staleTime` of at least 1 hour and no refetch on window focus, with stale requests cancelled via `AbortSignal`
 
 ### Browse
 
 - [ ] **BRW-01**: User can see characters in a responsive grid (2 columns under 640 px, 3 from 640–1024 px, 4–5 above)
 - [ ] **BRW-02**: User can search by name with a 300 ms debounce, and clear it with a × button or Escape
-- [ ] **BRW-03**: User can filter by status, gender and species chips (one value per group), and deselect an active chip by clicking it
+- [x] **BRW-03**: User can filter by status, gender and species chips (one value per group), and deselect an active chip by clicking it
 - [ ] **BRW-04**: Species chips (Human, Alien, Humanoid, Mythological Creature, Robot, Animal) match exactly, so Human excludes Humanoid, and the displayed total is derived correctly
 - [ ] **BRW-05**: User can reset search and filters with "Clear all"
-- [ ] **BRW-06**: Search and filters live in the URL query, so refresh, back and shared links preserve them (typing replaces history, chip changes push)
+- [x] **BRW-06**: Search and filters live in the URL query, so refresh, back and shared links preserve them (typing replaces history, chip changes push)
 - [ ] **BRW-07**: User sees "N characters" announced via `aria-live="polite"`
 - [ ] **BRW-08**: User can load more by scrolling (IntersectionObserver) or via a "Load more" button, with no duplicates, and an announcement when more are loaded
 - [ ] **BRW-09**: User sees skeleton cards while loading, an empty state ("No characters in this dimension" with a clear-filters button), and an error state with Retry (including offline wording)
@@ -137,13 +137,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-02 | Phase 1 | Complete |
 | DATA-03 | Phase 1 | Pending |
 | DATA-04 | Phase 3 | Pending |
-| DATA-05 | Phase 1 | Pending |
+| DATA-05 | Phase 1 | Complete |
 | BRW-01 | Phase 1 | Pending |
 | BRW-02 | Phase 1 | Pending |
-| BRW-03 | Phase 1 | Pending |
+| BRW-03 | Phase 1 | Complete |
 | BRW-04 | Phase 1 | Pending |
 | BRW-05 | Phase 1 | Pending |
-| BRW-06 | Phase 1 | Pending |
+| BRW-06 | Phase 1 | Complete |
 | BRW-07 | Phase 1 | Pending |
 | BRW-08 | Phase 1 | Pending |
 | BRW-09 | Phase 1 | Pending |
