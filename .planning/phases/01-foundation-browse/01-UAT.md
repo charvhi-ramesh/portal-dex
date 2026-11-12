@@ -183,12 +183,12 @@ result: pass
 ### 37. [Plan 08 D2] Settled result count announced once per search or filter change from o...
 expected: Settled result count announced once per search or filter change from one polite atomic region; never interim, never Humanoid-inflated
 result: skipped
-reason: User skipped this check (live-region announcement not confirmed by a human or screen reader)
+reason: "Deferred follow-up: User chose to defer to the Phase 3 accessibility pass"
 
 ### 38. [Plan 08 D3] Each filter set has its own query key and every API sub-request of a l...
 expected: Each filter set has its own query key and every API sub-request of a load step receives the query AbortSignal
 result: skipped
-reason: User skipped this check (code-level; covered by 10 passing node:test cases in lib/query/options.test.ts, not human-confirmed)
+reason: "Deferred follow-up: User chose to defer to the Phase 3 accessibility pass"
 
 ### 39. [Plan 09 D1] First-page failure shows the error panel (offline or generic wording) ...
 expected: First-page failure shows the error panel (offline or generic wording) with a Retry that refetches page 1; filters stay usable
@@ -201,7 +201,7 @@ result: pass
 ### 41. [Plan 09 D3] Loading shows card-sized skeletons (4/6/8/10 by breakpoint, opacity pu...
 expected: Loading shows card-sized skeletons (4/6/8/10 by breakpoint, opacity pulse, static 0.75 under reduced motion); the prerendered /browse shell contains the skeleton grid, the Counting... slot and an aria-busy region
 result: skipped
-reason: User skipped this check (skeleton counts, layout shift near 640 px and reduced-motion behaviour not human-confirmed)
+reason: "Deferred follow-up: User chose to defer to the Phase 3 accessibility pass"
 
 ### 42. [Plan 10 D5] Production build and combined Phase 1 smoke check still serve /, /brow...
 expected: Production build and combined Phase 1 smoke check still serve /, /browse and /collection
@@ -215,7 +215,7 @@ result: pass
 ### 44. [Plan 10 D2] Focus hand-off to the first new card, aria-disabled Loading more... bu...
 expected: Focus hand-off to the first new card, aria-disabled Loading more... button, n more characters loaded announcements
 result: skipped
-reason: User skipped this check (focus hand-off to first new card and loading announcements not human-confirmed; WR-03 and WR-06 stay open)
+reason: "Deferred follow-up: User chose to defer to the Phase 3 accessibility pass"
 
 ### 45. [Plan 10 D3] End-of-list note replaces the button with no error or empty state; fai...
 expected: End-of-list note replaces the button with no error or empty state; failed next-page load keeps cards, shows role=alert Retry row and pauses auto-loading
@@ -233,6 +233,21 @@ issues: 0
 pending: 0
 skipped: 4
 blocked: 0
+
+## Deferred Follow-Ups
+
+- test: 37
+  idea: "Screen-reader check that the settled result count is announced once and never as the raw Humanoid-inflated figure; re-check in the Phase 3 accessibility pass"
+  deferred_at: 2026-11-12
+- test: 38
+  idea: "Query-key and AbortSignal behaviour per filter set; covered by 10 passing node:test cases in lib/query/options.test.ts; confirm in the Phase 3 pass"
+  deferred_at: 2026-11-12
+- test: 41
+  idea: "Skeleton counts (4/6/8/10), no layout shift on swap near 640 px, and static skeletons under reduced motion; re-check in the Phase 3 accessibility pass"
+  deferred_at: 2026-11-12
+- test: 44
+  idea: "Focus hand-off to the first new card after Load more and the loading announcements (WR-03 and WR-06 are related open warnings); re-check in the Phase 3 accessibility pass"
+  deferred_at: 2026-11-12
 
 ## Gaps
 
