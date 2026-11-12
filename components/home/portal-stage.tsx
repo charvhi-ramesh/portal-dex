@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import { LiveRegion, useAnnouncer } from "@/components/browse/live-region";
 import { useOnlineStatus } from "@/components/browse/use-online-status";
 import { CharacterCard } from "@/components/card/character-card";
+import { TiltFrame } from "@/components/card/tilt-frame";
 import { PortalDisc } from "@/components/home/portal-disc";
 import { useMediaQuery } from "@/components/layout/use-media-query";
 import {
@@ -182,7 +183,9 @@ export function PortalStage() {
             transition={{ duration: reduced ? 0.2 : 0.4, ease: "easeOut" }}
             className="relative z-10 w-[min(56vw,15rem)] [grid-area:1/1]"
           >
-            <CharacterCard character={character} eager />
+            <TiltFrame>
+              <CharacterCard character={character} eager />
+            </TiltFrame>
           </motion.div>
         ) : null}
       </div>
