@@ -13,9 +13,9 @@ export function CharacterGrid({
       aria-busy={busy || undefined}
       className="grid list-none grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4 xl:grid-cols-5"
     >
-      {characters.map((character) => (
+      {characters.map((character, index) => (
         <li key={character.id}>
-          <CharacterCard character={character} eager={false} />
+          <CharacterCard character={character} eager={index < 5} />
         </li>
       ))}
     </ul>
