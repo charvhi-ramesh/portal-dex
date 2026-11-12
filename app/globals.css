@@ -1,26 +1,145 @@
 @import "tailwindcss";
 
+/*
+ * Portal Dex theme tokens (dark only). `--color-*: initial` removes Tailwind's
+ * default palette so only the UI-SPEC colours exist. scripts/check-contrast.ts
+ * parses the --color-* declarations below and --star-dot-opacity in :root.
+ */
+@theme {
+  --color-*: initial;
+  --color-bg: #0A0F1F;
+  --color-surface: #131B33;
+  --color-surface-raised: #1B2545;
+  --color-text: #F2F5FF;
+  --color-text-muted: #A9B3CC;
+  --color-blue: #4DA3FF;
+  --color-blue-hover: #7DBAFF;
+  --color-teal: #6FF2D2;
+  --color-grey: #8A93A6;
+  --color-purple: #A66BFF;
+  --color-pink: #FF7AC8;
+  --color-border-ui: #6B7799;
+  --color-divider: #252F52;
+  --color-star-dot: #C9D4FF;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 20px;
+  --radius-panel: 24px;
+  --radius-input: 16px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Planning decision 1: star dots are capped at 15% so every text pair stays at 4.5:1. */
+  --star-dot-opacity: 0.15;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  color-scheme: dark;
+  /* Sticky header (64px) plus 16px breathing room, so focus and anchors are never obscured. */
+  scroll-padding-top: 80px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* The page background lives on html so the z-index -1 star layer stays visible. */
+body {
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+}
+
+/* Skip link: off-screen until focused, then fixed top-left. */
+.skip-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: var(--radius-input);
+  background-color: var(--color-blue);
+  color: var(--color-bg);
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transform: translateY(-300%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* Star field: three oversized, tiled dot layers drifting by exactly one tile (transform only). */
+.star-field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: var(--star-dot-opacity);
+}
+
+.star-layer {
+  position: absolute;
+  top: calc(-1 * var(--tile));
+  left: calc(-1 * var(--tile));
+  width: calc(100% + var(--tile));
+  height: calc(100% + var(--tile));
+  background-size: var(--tile) var(--tile);
+  background-repeat: repeat;
+  will-change: transform;
+  animation: star-drift var(--drift-duration) linear infinite;
+}
+
+.star-layer-1 {
+  --tile: 240px;
+  --drift-duration: 90s;
+  background-image:
+    radial-gradient(circle at 31px 47px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 143px 19px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 197px 163px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 83px 211px, var(--color-star-dot) 0.5px, transparent 1.2px);
+}
+
+.star-layer-2 {
+  --tile: 360px;
+  --drift-duration: 150s;
+  background-image:
+    radial-gradient(circle at 67px 103px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 251px 41px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 317px 269px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 149px 307px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 29px 233px, var(--color-star-dot) 0.5px, transparent 1.2px);
+}
+
+.star-layer-3 {
+  --tile: 520px;
+  --drift-duration: 240s;
+  background-image:
+    radial-gradient(circle at 109px 71px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 433px 149px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 277px 389px, var(--color-star-dot) 0.5px, transparent 1.2px),
+    radial-gradient(circle at 53px 463px, var(--color-star-dot) 0.5px, transparent 1.2px);
+}
+
+@keyframes star-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(var(--tile), var(--tile), 0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  .star-layer {
+    animation: none;
+  }
 }
