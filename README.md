@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portal Dex
 
-## Getting Started
+Portal Dex turns every character from the Rick and Morty API into a holographic collectible card: browse, search, filter, flip, favourite, and pull random characters out of an animated portal.
 
-First, run the development server:
+Unofficial fan project; not affiliated with the show or its owners. Data from [The Rick and Morty API](https://rickandmortyapi.com).
+
+## Live site
+
+Live site: not deployed yet
+
+## Develop
+
+Requires Node 22.18 or newer.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm ci
+npm run dev      # development server on http://localhost:3000
+npm test         # unit tests
+npm run build    # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The smoke runner checks the served HTML of a production build it starts itself (run `npm run build` first):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+node scripts/smoke.ts route:/ "Portal Dex"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+It can also check a running site, either https or http on localhost:
 
-## Learn More
+```bash
+node scripts/smoke.ts --base https://your-project.vercel.app route:/ "Portal Dex"
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Deploy from the Vercel dashboard. The app needs no environment variables and no secrets.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push the repository to a Git host Vercel can read (GitHub, GitLab or Bitbucket).
+2. In the Vercel dashboard choose Add New, then Project, then Import Git Repository, and pick the repository.
+3. Framework Preset: Next.js. Root Directory: `./`. Leave the Build, Install and Output settings on their defaults.
+4. Environment Variables: add none.
+5. Node.js Version (Project Settings, Build and Deployment): 22.x.
+6. Press Deploy and wait for "Ready", then open the production domain.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Vercel CLI is not used: fetching it through `npx` would add a package this project has not approved.
